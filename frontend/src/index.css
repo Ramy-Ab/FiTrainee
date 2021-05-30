@@ -1,0 +1,303 @@
+html,
+body {
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  height: 100%;
+  width: 100%;
+  min-width: 350px;
+}
+
+.py-3 {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+main.py-3 {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* .py-3 {
+  background-color: white;
+} */
+
+button {
+  cursor: pointer;
+}
+
+.center {
+  display: center;
+  justify-content: center;
+}
+main {
+  min-height: 80vh;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+h3 {
+  padding: 1rem 0;
+}
+
+.rating span {
+  margin: 0.1rem;
+}
+
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+.carousel-caption {
+  top: 0;
+  margin-top: 12px;
+}
+
+.carousel-caption h4 {
+  color: #fff;
+}
+
+.carousel {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("./images/banner.png");
+  position: relative;
+}
+
+.carousel img {
+  display: block;
+  height: 300px;
+  padding: 30px;
+  margin: 40px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel a {
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    font-size: 2.5vw;
+  }
+}
+
+[class^="cm-"],
+[class*=" cm-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "cm-icon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cm-smart-food-1:before {
+  content: "\e950";
+}
+.cm-smart-food-2:before {
+  content: "\e951";
+}
+.cm-smart-food-3:before {
+  content: "\e952";
+}
+.cm-premium-HRreport:before {
+  content: "\e925";
+}
+
+.pt-3,
+.py-3 {
+  padding-top: 0;
+  background-color: black;
+}
+Col {
+  color: black;
+}
+
+.black-card {
+  background-color: #202020;
+}
+
+.card-title {
+  color: white;
+}
+
+.page-item.active .page-link .paginate {
+  background-color: crimson;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+.page-link {
+  color: #8a4646 !important;
+}
+.custom-d {
+  background-color: #27272769 !important;
+}
+.card {
+  background-color: black !important;
+}
+
+.btn-block {
+  background-color: #ff1414 !important;
+  border-color: #ff1414 !important;
+}
+.btn-block:hover {
+  background-color: black !important;
+  border-color: black !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+  color: white !important;
+}
+a {
+  color: white !important;
+}
+
+.active {
+  border-radius: 5px !important;
+}
+
+.list-group-item:hover {
+  border-color: #000000 !important;
+}
+.btn {
+  background-color: #ff1414 !important;
+  border-color: #ff1414 !important;
+}
+.btn:hover {
+  background-color: black !important;
+  border-color: black !important;
+}
+.login-header {
+  width: 100%;
+  height: 768px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../src/images/login2.jpg");
+  position: relative;
+  z-index: 0;
+}
+
+.login-form {
+  background-color: #000000d1 !important;
+}
+/* .row {
+  background: none !important;
+} */
+
+.NavDropdown .dropdown-menu.show .dropdown-menu .show {
+  background-color: #202020 !important;
+}
+div.dropdown-menu.show {
+  background-color: #202020;
+}
+.table {
+  color: white !important;
+}
+
+.dashboard-container {
+  background-color: rgb(255, 255, 255);
+  min-height: 100vh;
+  color: rgb(0, 0, 0) !important;
+  font-size: 12px !important;
+}
+
+.typography-color {
+  color: rgb(0, 0, 0);
+}
+
+.custom-dd {
+  background-color: #161414 !important;
+}
+
+.active-d {
+  color: #fff;
+  background-color: #6aec6a;
+  width: fit-content;
+  padding: 0 5px;
+  border-radius: 2px;
+}
+.deactive-d {
+  color: rgb(255, 255, 255);
+  background-color: #ec4f4f;
+  width: fit-content;
+  padding: 0 5px;
+  border-radius: 2px;
+}
+
+.dashboard-container h6,
+h2 {
+  color: #000000 !important;
+  flex-grow: 1;
+}
+
+.makeStyles-content-10 {
+  overflow: auto;
+}
+
+#form-dialog-title {
+  color: black !important;
+  background-color: #fff !important;
+}
+
+.MuiPaper-elevation3 {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 8px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.modal-title {
+  color: black !important;
+  height: 4rem !important;
+}
+
+.MuiTypography-root .MuiTypography-h6 {
+  color: #fff !important;
+}
+
+.form-check-input {
+  border: solid 1px !important ;
+}

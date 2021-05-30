@@ -1,0 +1,735 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,600");
+
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+body {
+  color: white;
+  font-family: Raleway, HelveticaNeue, Arial, SansSerif !important;
+  font-size: 20px !important;
+}
+
+div.phone-holder {
+  text-align: center;
+}
+
+img.phone {
+  max-width: 90%;
+  margin: auto;
+}
+
+.container-fluid {
+  max-width: 1170px;
+}
+
+.home-sections hr,
+.api-demo hr {
+  width: 115px;
+  margin-left: 0px;
+  margin-top: 34px;
+  margin-bottom: 34px;
+  border-top: 1px solid #ffffff;
+}
+
+.home-sections h2 {
+  font-family: Raleway, HelveticaNeue, Helvetica;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: #ffffff;
+  margin-top: 1.4em;
+}
+
+.home-sections p {
+  font-family: Raleway, HelveticaNeue, Helvetica;
+  font-weight: 400;
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/*HACK*/
+.desktop-padding {
+  height: 100px;
+}
+
+.logo .logo-center {
+  max-width: 80%;
+}
+
+.logo h3 {
+  color: #6b7a85;
+  font-size: 26px;
+  font-weight: 400;
+  font-family: Raleway, HelveticaNeue, Helvetica;
+  margin-bottom: 1em;
+  margin-top: 0px;
+}
+
+.appstore {
+  margin-bottom: 20px;
+  width: 180px;
+}
+
+/* This should be in media query for xs*/
+
+.menu-container {
+  max-width: 1280px;
+  width: 100%;
+  display: inline-block;
+  margin: auto;
+  text-align: left;
+}
+
+#menu-top {
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1000;
+  /*	height:88px;*/
+  background-color: #efecef;
+  position: fixed;
+  font-family: Raleway, HelveticaNeue, Helvetica;
+  font-weight: 600;
+  font-size: 16px;
+  color: #6b7a85;
+  line-height: 60px;
+}
+
+#menu-top a {
+  color: #454f56;
+  display: inline-block;
+  line-height: 40px;
+  margin: 0px 10px 0px 40px;
+}
+
+#menu-top a.active {
+  color: #eb6f00;
+}
+
+#menu-top a.button {
+  font-size: 18px;
+  border: 1px solid #454f56;
+  line-height: 38px;
+  padding: 0px 20px;
+  color: #454f56;
+  float: right;
+  margin-top: 9px;
+
+  margin: 8px 10px 0px 0px;
+  border-radius: 5px;
+}
+
+/*Side navigation*/
+#fp-nav ul li a.active span,
+#fp-nav ul li a.hover span {
+  background-color: #eb6f00;
+  /*	height: 12px;
+	width: 12px;*/
+}
+#fp-nav ul li a span {
+  background-color: #9e9e9e;
+  /*	height: 12px;
+	width: 12px;*/
+}
+
+/* Backgrounds
+.section{
+	background-size: cover;
+}
+.section1{
+	background-image:url(img/bg1.jpg);
+}
+.section2{
+	background-image:url(img/bg2.jpg);
+}
+.section3{
+	background-image:url(img/bg3.jpg);
+}
+.section4{
+	background-image:url(img/bg4.jpg);
+} */
+
+.featured {
+  position: absolute;
+  bottom: 0;
+  line-height: 102px;
+  height: 102px;
+  background-color: #ff9422;
+  width: 100%;
+  text-align: center;
+}
+
+@media only screen and (min-width: 779px) {
+  .text-col {
+    margin-top: 100px;
+  }
+
+  #fp-nav.right {
+    right: 15px;
+  }
+
+  #fp-nav ul li a.active span,
+  #fp-nav ul li a.hover span,
+  #fp-nav ul li a.active:hover span {
+    height: 22px;
+    width: 22px;
+    margin: -11px 0 0 -11px;
+    border-radius: 100%;
+  }
+
+  #fp-nav ul li a span {
+    margin: -4px 0 0 -4px;
+    height: 8px;
+    width: 8px;
+  }
+  #fp-nav ul li {
+    height: 22px;
+  }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 780px) {
+  #menu-top {
+    height: 60px;
+    line-height: 60px;
+    font-size: 12px;
+  }
+  #menu-top a:nth-child(1) {
+    margin: 0px 10px 0px 20px;
+  }
+  #menu-top a {
+    margin: 0px 10px 0px 5px;
+  }
+  .appstore {
+    width: 125px;
+  }
+
+  .text-col {
+    padding-left: 28px !important;
+    padding-right: 35px !important;
+  }
+
+  .home-sections hr {
+    width: 70px;
+    margin-left: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .home-sections h2 {
+    font-family: Raleway, HelveticaNeue, Helvetica;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 19px;
+    color: #646f78;
+  }
+
+  .home-sections p {
+    font-family: Raleway, HelveticaNeue, Helvetica;
+    font-weight: 500;
+    font-size: 15px;
+    color: #646f78;
+  }
+
+  .logo h3 {
+    font-size: 15px;
+  }
+  .section {
+    background: white;
+  }
+
+  #fp-nav.right {
+    right: 3px;
+  }
+}
+
+/* Api demo */
+/* --------------------------- */
+.api-demo hr {
+  margin-left: auto;
+  margin-right: auto;
+}
+.api-demo h1 {
+  font-size: 40px;
+  font-weight: 400;
+  margin-bottom: 0.7em;
+}
+
+.api-demo h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0.9em;
+}
+
+.api-demo h3 {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.api-demo h5 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.api-demo .feature {
+  margin-bottom: 2em;
+}
+
+.api-demo .feature p {
+  margin-bottom: 2em;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.cm_fullheight {
+  min-height: 100vh;
+  display: table;
+  margin: auto;
+  /*border:1px solid red;*/
+  /*margin-top: -60px;*/
+  width: 100%;
+  padding-top: 60px;
+}
+
+.api-demo #try {
+  min-height: 100vh;
+  padding-top: 60px;
+}
+
+.cm_fullheight .cm_fullheight_center {
+  display: table-cell;
+  vertical-align: middle;
+
+  width: 100%;
+}
+
+.api-demo .features {
+  text-align: center;
+}
+
+.api-demo a.button,
+.contact a.button,
+.appdemo a.button {
+  display: inline-block;
+  color: rgb(255, 32, 32);
+  background-color: rgb(255, 32, 32);
+  border-radius: 5px;
+  line-height: 48px;
+  min-width: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 18px;
+}
+
+.api-demo a.button.button-big,
+.contact a.button.button-big,
+.appdemo a.button.button-big {
+  line-height: 56px;
+  font-size: 21px;
+  padding: 0px 50px;
+  min-width: 280px;
+}
+
+.feature-list > div {
+  padding-left: 75px;
+}
+
+.feature-list .icon {
+  color: #eb6f00;
+  font-size: 60px;
+  margin-left: -65px;
+  margin-top: 12px;
+  float: left;
+}
+
+.footer {
+  background-color: #909090;
+  text-align: center;
+  padding-top: 40px !important;
+}
+
+.footer a,
+.footer {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/*Image dropbox*/
+
+.placeholder {
+  position: relative;
+}
+
+.image-dropbox {
+  position: relative;
+  z-index: 1;
+}
+
+.col-sm-7 {
+  position: relative;
+}
+
+.previews {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.image-dropbox .placeholder {
+  border: 1px dashed #92a1a5;
+  text-align: center;
+  /*min-height: 250px;*/
+  padding: 20% 0px;
+  color: #92a1a5;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.image-dropbox .placeholder img {
+  margin-bottom: 10px;
+}
+
+.image-dropbox.active .placeholder {
+  border: 1px dashed green;
+  background-color: #ddd;
+}
+
+.image-dropbox .preview img {
+  width: 100%;
+}
+
+.image-dropbox .preview {
+  display: none;
+}
+
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/*upload section*/
+
+.upload-section {
+  clear: both;
+  margin-top: 32px;
+  font-family: "Roboto", HelveticaNeue, Helvetica;
+  font-weight: 400;
+  font-size: 13px;
+  color: #92a1a5;
+}
+
+.upload-section a.button {
+  float: right;
+}
+
+.url-section {
+  display: none;
+}
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.fileUpload input.file-upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+/* results*/
+#json-result {
+  unicode-bidi: embed;
+  font-family: monospace;
+  white-space: pre;
+}
+
+.food-list {
+  transition: display 0.33s;
+  font-size: 16px;
+}
+
+.group-collapsed {
+  display: none;
+}
+
+.food-group .food-item {
+  overflow: hidden;
+}
+
+.food-item {
+  line-height: 1.3em;
+}
+
+.food-group h4 {
+  cursor: pointer;
+  background-color: #ddd;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 500;
+
+  border-radius: 3px;
+  position: relative;
+}
+
+.food-group .group-name {
+  z-index: 100;
+  padding-left: 8px;
+  position: relative;
+}
+
+.food-group .score {
+  width: 30px;
+  background-color: #51d297;
+  display: inline-block;
+  height: 30px;
+  position: absolute;
+  z-index: 50;
+  border-radius: 3px;
+}
+
+.food-group .calories {
+  float: right;
+  font-weight: 600;
+  color: #eb6f00;
+}
+
+.serving-size {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/*Example images*/
+
+.example-images {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.example-images > div {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.example-images img {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+.recognizing-status {
+  display: none;
+}
+
+a.button,
+a.button:hover,
+a.button:visited {
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 779px) {
+}
+
+@media only screen and (max-width: 780px) {
+  .api-demo h1 {
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 0.7em;
+  }
+  .api-demo a.button.button-big {
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0px 50px;
+    min-width: 250px;
+  }
+  .api-demo h2 {
+    font-size: 20px;
+    /*font-weight: 400;
+		margin-bottom: 0.7em;*/
+  }
+  .api-demo .feature p {
+    margin-bottom: 2em;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .api-demo .upload-section a.button {
+    float: none;
+    /* width: 100%; */
+    display: block;
+    margin-bottom: 0.5em;
+  }
+  .fileUpload.button {
+    margin-left: 0px;
+  }
+}
+
+.contact input,
+.contact textarea,
+.contact select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: white;
+  line-height: 2em;
+  border: 1px solid #6b7a85;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  padding: 6px 6px 6px 14px;
+  font-size: 18px;
+  color: #6b7a85;
+  margin-bottom: 1.1em;
+}
+
+.contact .g-recaptcha {
+  margin: auto;
+  display: inline-block;
+}
+
+.contact h2 {
+  margin: 100px auto 2em;
+  font-weight: 500px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.contact .thankyou {
+  display: none;
+}
+
+.contact .done .thankyou {
+  display: block;
+}
+
+.contact .done .form {
+  display: none;
+}
+
+/*App*/
+
+.app_preview {
+  text-align: center;
+  position: relative;
+  margin-bottom: 3em;
+}
+
+.info_bubble {
+  border-radius: 38px;
+  background-color: #e8e9ee;
+  color: #08003b;
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  display: inline-block;
+  padding: 1.5em;
+  z-index: 100;
+}
+
+.info_bubble.left {
+  border-top-right-radius: 5px;
+  top: 40%;
+  left: 20px;
+}
+.info_bubble.right {
+  border-bottom-left-radius: 5px;
+  top: 20%;
+  right: 20px;
+}
+
+.app_preview_screens img {
+  width: 100%;
+}
+
+.appdemo .container {
+  max-width: 880px;
+}
+
+.app_logo {
+  margin: auto;
+  max-width: 400px;
+}
+
+@media only screen and (max-width: 780px) {
+  .iphone_model {
+    /*display: inline-block;;*/
+    /*max-width: 90%;*/
+    width: 200px;
+    height: 409px;
+    padding: 50px 12px 0px 12px;
+    /* padding: 24.5% 6.5%; */
+    /*background: url(/appscreens/background.png);*/
+    /*background-repeat:no-repeat;*/
+    /*background-position: center center;*/
+    /* background-attachment: fixed; removed for Android */
+    /*  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;*/
+    /*background-size: 100%;*/
+  }
+  .info_bubble {
+    border-radius: 25px;
+    /*background-color: #e8e9ee;*/
+    /*color:#08003b;*/
+    font-size: 13px;
+    /*font-weight: 600;*/
+    /*position: absolute;*/
+    /*display: inline-block;*/
+    /*padding: 1em;*/
+    /*z-index: 100;*/
+  }
+}
+
+p {
+  color: rgb(255, 255, 255);
+}
+
+.pr-btn-foodai {
+  margin-left: 4%;
+  padding: 50 100%;
+  line-height: 56px;
+  font-size: 21px;
+  padding: 0px 50px;
+  min-width: 280px;
+}
+
+.fa-search {
+  color: rgba(255, 0, 0, 0.693);
+}
+
+.fa-atom {
+  color: rgba(255, 0, 0, 0.693);
+}
+.fa-pizza-slice {
+  color: rgba(255, 0, 0, 0.693);
+}
+.fa-chart-bar {
+  color: rgba(255, 0, 0, 0.693);
+}
+a:hover,
+.foodai-li:hover {
+  text-decoration: none !important;
+}
+.foodaiscreen {
+  background-color: rgb(0, 0, 0);
+}
+.foodai-li {
+  align-items: center !important;
+}

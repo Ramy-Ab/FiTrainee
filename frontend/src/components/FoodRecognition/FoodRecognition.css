@@ -1,0 +1,14 @@
+.centred{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    top: 50px;
+    max-height: 500px;
+    
+}
+.inputimage{
+    border-radius: 50px;
+}
