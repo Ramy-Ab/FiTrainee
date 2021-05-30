@@ -9,16 +9,22 @@ body {
   min-width: 350px;
 }
 
-.py-3 {
+.py-3-main {
   background-color: #ffffff;
   margin: 0;
   padding: 0;
 }
 
-main.py-3 {
+main.py-3-main {
   padding: 0;
   margin: 0;
   min-height: 100vh;
+}
+
+.pt-3,
+.py-3-main {
+  padding-top: 0;
+  background-color: black;
 }
 
 .particles {
@@ -73,6 +79,7 @@ h3 {
 .carousel-caption {
   top: 0;
   margin-top: 12px;
+  z-index: -1 !important;
 }
 
 .carousel-caption h4 {
@@ -135,11 +142,6 @@ h3 {
   content: "\e925";
 }
 
-.pt-3,
-.py-3 {
-  padding-top: 0;
-  background-color: black;
-}
 Col {
   color: black;
 }
@@ -267,7 +269,7 @@ div.dropdown-menu.show {
 }
 
 .dashboard-container h6,
-h2 {
+.dashboard-container h2 {
   color: #000000 !important;
   flex-grow: 1;
 }

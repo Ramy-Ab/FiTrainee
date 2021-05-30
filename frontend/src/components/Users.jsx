@@ -237,7 +237,7 @@ export const Users = (history) => {
                   type="email"
                   fullWidth
                 /> */}
-          <FormContainer className="col-md-12">
+          <div className="col-md-12">
             {loadingUpdate && <Loader />}
             {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 
@@ -277,7 +277,7 @@ export const Users = (history) => {
                 </Form.Group>
               </Form>
             )}
-          </FormContainer>
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

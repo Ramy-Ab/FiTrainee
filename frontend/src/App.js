@@ -29,7 +29,7 @@ function App() {
     <Router>
       {window.location.href.split("/")[4] === "dashboard" ? "" : <NavBar />}
 
-      <main className="py-3 mt-5">
+      <main className=" mt-5 py-3-main">
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/gym" component={HomePageScreen} exact />
         <Route path="/" component={HomeScreen} exact />
