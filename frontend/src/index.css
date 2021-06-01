@@ -299,3 +299,45 @@ div.dropdown-menu.show {
 .form-check-input {
   border: solid 1px !important ;
 }
+
+.MuiPaper-root {
+  background-color: #000000 !important;
+  color: #fff !important;
+}
+
+.MuiTypography-root {
+  color: #fff !important;
+}
+
+.MuiSvgIcon-root {
+  color: white;
+}
+
+#date-picker-inline {
+  color: rgb(255, 255, 255) !important;
+}
+
+#standard-basic-label {
+  color: #fff;
+}
+.text-radio {
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  color: #d5cfcf;
+  white-space: normal;
+}
+
+.onboard-radio {
+  border: 1px solid #dae0e6;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 5px 7px;
+}
+
+.MuiInputLabel-formControl {
+  top: 0;
+  left: 0;
+  position: absolute;
+  transform: translate(0, 17px) scale(1);
+}
