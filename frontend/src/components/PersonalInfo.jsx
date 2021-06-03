@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { traineeInfo } from "../actions/userActions";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BasicButtonGroup() {
   const classes = useStyles();
-  const [btnS, setBtn] = React.useState("btn1");
+  const [btnS, setBtnS] = React.useState("btn1");
 
   const btns = ["Male", "Female", "Other"];
 
@@ -34,9 +36,19 @@ export default function BasicButtonGroup() {
     new Date("2014-08-18T21:11:54")
   );
 
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+  const UserTrainee = useSelector((state) => state.UserTrainee);
+  const { trainee } = UserTrainee;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(traineeInfo({ ...trainee, height, weight, selectedDate, btnS }));
+  }, [height, weight, selectedDate, btnS]);
 
   return (
     <div className={classes.root}>
@@ -48,7 +60,7 @@ export default function BasicButtonGroup() {
       >
         {btns.map((btn) => (
           <Button
-            onClick={() => setBtn(btn)}
+            onClick={() => setBtnS(btn)}
             variant={btn === btnS ? "contained" : "outlined"}
           >
             {btn}
@@ -73,9 +85,23 @@ export default function BasicButtonGroup() {
         </Grid>
       </MuiPickersUtilsProvider>
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="standard-basic" label="height" />
+        <TextField
+          id="standard-basic"
+          label="height"
+          value={height}
+          onChange={(e) => {
+            setHeight(e.target.value);
+          }}
+        />
         cm
-        <TextField id="standard-basic" label="weight" />
+        <TextField
+          id="standard-basic"
+          label="weight"
+          value={weight}
+          onChange={(e) => {
+            setWeight(e.target.value);
+          }}
+        />
         Kg
       </form>
     </div>

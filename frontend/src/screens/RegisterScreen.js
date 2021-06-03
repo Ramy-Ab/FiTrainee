@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
-import { register } from "../actions/userActions";
+import { register, traineeInfo } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import BasicButtonGroup from "../components/PersonalInfo";
 import Activities from "../components/Activities";
 import Consultation from "../components/Consultation";
+import TrainingPlan from "../components/TrainingPlan";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,7 @@ function getSteps() {
     "Personal Info",
     "Your Activities",
     "Your Objectives",
+    "Training Plan",
   ];
 }
 
@@ -54,11 +56,18 @@ function RegisterScreen({ location, history }) {
   const userRegister = useSelector((state) => state.userRegister);
   const { error, loading, userInfo } = userRegister;
 
+  const UserTrainee = useSelector((state) => state.UserTrainee);
+  const { trainee } = UserTrainee;
+
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
     }
   }, [history, userInfo, redirect]);
+
+  useEffect(() => {
+    dispatch(traineeInfo({ ...trainee, name, email, password }));
+  }, [name, email, password]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -152,6 +161,8 @@ function RegisterScreen({ location, history }) {
         return <Activities />;
       case 3:
         return <Consultation />;
+      case 4:
+        return <TrainingPlan />;
       default:
         return "Unknown stepIndex";
     }

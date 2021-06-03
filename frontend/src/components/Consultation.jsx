@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
@@ -6,8 +7,21 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
+import { traineeInfo } from "../actions/userActions";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  button: {
+    display: "block",
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
   root: {
     "&:hover": {
       backgroundColor: "transparent",
@@ -49,7 +63,7 @@ const useStyles = makeStyles({
       backgroundColor: "#106ba3",
     },
   },
-});
+}));
 
 // Inspired by blueprintjs
 function StyledRadio(props) {
@@ -68,11 +82,26 @@ function StyledRadio(props) {
 }
 
 export default function Consultation() {
+  const classes = useStyles();
+  const [objective, setObjective] = React.useState("Gain Muscles");
+  const [experience, setExperience] = React.useState("yes");
+
+  const UserTrainee = useSelector((state) => state.UserTrainee);
+  const { trainee } = UserTrainee;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(traineeInfo({ ...trainee, objective, experience }));
+  }, [objective, experience]);
+
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">How Are You ?</FormLabel>
       <RadioGroup
-        defaultValue="Gain Muscles"
+        onChange={(e) => {
+          setObjective(e.target.value);
+        }}
+        defaultValue={objective}
         aria-label="objectif"
         name="customized-radios"
       >
@@ -105,6 +134,20 @@ export default function Consultation() {
           />
         </div>
       </RadioGroup>
+
+      <h4>Do you have experience with exercise ?</h4>
+      <div class="select">
+        <select
+          name="slct"
+          id="slct"
+          onChange={(e) => {
+            setExperience(e.target.value);
+          }}
+        >
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
     </FormControl>
   );
 }

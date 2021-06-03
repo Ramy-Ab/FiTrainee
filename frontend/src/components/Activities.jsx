@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
@@ -6,6 +7,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { traineeInfo } from "../actions/userActions";
 
 const useStyles = makeStyles({
   root: {
@@ -68,11 +70,27 @@ function StyledRadio(props) {
 }
 
 export default function Activities() {
+  const [activitie, setActivitie] = React.useState("Lightly Active");
+
+  const UserTrainee = useSelector((state) => state.UserTrainee);
+  const { trainee } = UserTrainee;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(traineeInfo({ ...trainee, activitie }));
+  }, [activitie]);
+
+  console.log(activitie);
+  const handleRadioChange = (event) => {
+    setActivitie(event.target.value);
+    console.log(event.target.value);
+  };
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">How Are You ?</FormLabel>
       <RadioGroup
-        defaultValue="Sedentary"
+        onChange={handleRadioChange}
+        defaultValue={activitie}
         aria-label="gender"
         name="customized-radios"
       >
