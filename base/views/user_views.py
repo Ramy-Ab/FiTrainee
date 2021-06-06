@@ -1,3 +1,4 @@
+from base.models import UserProfile
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -31,19 +32,35 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
-    try:
-        user = User.objects.create(
-            first_name=data['name'],
-            username=data['email'],
-            email=data['email'],
-            password=make_password(data['password'])
-        )
+    # try:
+    # 1- create user auth
+    user = User.objects.create(
+        first_name=data['name'],
+        username=data['email'],
+        email=data['email'],
+        password=make_password(data['password'])
+    )
 
-        serializer = UserSerializerWithToken(user, many=False)
-        return Response(serializer.data)
-    except:
-        message = {'detail': 'User with this email already exists'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    # 2- create userProfile
+    profile = UserProfile.objects.create(
+        user=user,
+        height=data['height'],
+        weight=data['weight'],
+        birthDate=data['birthDate'],
+        sex=data['sex'],
+        activitie=data['activitie'],
+        objective=data['objective'],
+        experience=data['experience'],
+        equipement=data['equipement'],
+        days=data['days'],
+        healthIssues=data['healthIssues'],
+    )
+
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
+    # except:
+    #     message = {'detail': 'User with this email already exists'}
+    #     return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])

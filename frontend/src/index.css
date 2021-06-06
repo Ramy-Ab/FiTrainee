@@ -300,18 +300,19 @@ div.dropdown-menu.show {
   border: solid 1px !important ;
 }
 
-.MuiPaper-root {
+/* .MuiPaper-root {
   background-color: #000000 !important;
   color: #fff !important;
-}
+} */
 
+/* it make dashboard title order ... white 
 .MuiTypography-root {
   color: #fff !important;
-}
-
-.MuiSvgIcon-root {
+} */
+/* it make dashboard icon white
+/* .MuiSvgIcon-root {
   color: white;
-}
+} */
 
 #date-picker-inline {
   color: rgb(255, 255, 255) !important;

@@ -75,7 +75,8 @@ function RegisterScreen({ location, history }) {
     if (password != confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(register(name, email, password));
+      console.log(trainee);
+      dispatch(register(trainee));
     }
   };
 
@@ -224,6 +225,9 @@ function RegisterScreen({ location, history }) {
           </Row>
         </div>
       </FormContainer>
+      <ButtonB type="submit" variant="primary" onClick={submitHandler}>
+        Register
+      </ButtonB>
     </div>
   );
 }

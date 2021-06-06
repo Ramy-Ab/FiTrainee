@@ -1,7 +1,10 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from PIL import Image
+from django.db.models.deletion import CASCADE
 from tensorflow.keras.preprocessing import image
 from tensorflow.python import ops
 from tensorflow.keras.models import load_model
@@ -66,6 +69,25 @@ class FoodImage(models.Model):
         #     self.result = 'failed'
 
         return super().save(*args, **kwargs)
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    height = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    weight = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    birthDate = models.DateTimeField(null=True, blank=True)
+    sex = models.CharField(max_length=200, null=True, blank=True)
+    activitie = models.CharField(max_length=200, null=True, blank=True)
+    objective = models.CharField(max_length=200, null=True, blank=True)
+    experience = models.CharField(max_length=200, null=True, blank=True)
+    equipement = models.CharField(max_length=200, null=True, blank=True)
+    days = models.CharField(max_length=200, null=True, blank=True)
+    healthIssues = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Product(models.Model):

@@ -28,27 +28,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BasicButtonGroup() {
   const classes = useStyles();
-  const [btnS, setBtnS] = React.useState("btn1");
+  const [sex, setSex] = React.useState("btn1");
 
   const btns = ["Male", "Female", "Other"];
 
-  const [selectedDate, setSelectedDate] = useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  const [birthDate, setBirthDate] = useState(new Date("2014-08-18T21:11:54"));
 
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setBirthDate(date);
   };
   const UserTrainee = useSelector((state) => state.UserTrainee);
   const { trainee } = UserTrainee;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(traineeInfo({ ...trainee, height, weight, selectedDate, btnS }));
-  }, [height, weight, selectedDate, btnS]);
+    dispatch(traineeInfo({ ...trainee, height, weight, birthDate, sex }));
+  }, [height, weight, birthDate, sex]);
 
   return (
     <div className={classes.root}>
@@ -60,8 +58,8 @@ export default function BasicButtonGroup() {
       >
         {btns.map((btn) => (
           <Button
-            onClick={() => setBtnS(btn)}
-            variant={btn === btnS ? "contained" : "outlined"}
+            onClick={() => setSex(btn)}
+            variant={btn === sex ? "contained" : "outlined"}
           >
             {btn}
           </Button>
@@ -76,7 +74,7 @@ export default function BasicButtonGroup() {
             margin="normal"
             id="date-picker-inline"
             label="Date picker inline"
-            value={selectedDate}
+            value={birthDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",

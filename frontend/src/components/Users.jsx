@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import { Form, Modal } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import Icon from "@material-ui/core/Icon";
+import TraineeDetails from "./TraineeDetails";
 
 export const Users = (history) => {
   const dispatch = useDispatch();
@@ -184,6 +185,25 @@ export const Users = (history) => {
           title="All Users"
           data={users}
           columns={columns}
+          detailPanel={[
+            {
+              tooltip: "Show Name",
+              render: (rowData) => {
+                return (
+                  <div
+                    style={{
+                      fontSize: 12,
+                      textAlign: "center",
+                      color: "#000000",
+                      backgroundColor: "#ffffff",
+                    }}
+                  >
+                    <TraineeDetails name={rowData.name} />
+                  </div>
+                );
+              },
+            },
+          ]}
           actions={[
             (rowData) => ({
               icon: "edit",
