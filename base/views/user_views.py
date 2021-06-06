@@ -106,6 +106,14 @@ def getUserById(request, pk):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getTraineeById(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
+
+
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def updateUser(request, pk):

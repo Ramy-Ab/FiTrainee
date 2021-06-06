@@ -68,9 +68,11 @@ class UserSerializerWithToken(UserSerializer):
         return str(token.access_token)
 
     def get_userProfile(self, obj):
+
         try:
             profile = UserProfileSerializer(
                 obj.userprofile, many=False).data
+
         except:
             profile = False
         return profile
