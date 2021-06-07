@@ -198,7 +198,7 @@ export const Users = (history) => {
                       backgroundColor: "#ffffff",
                     }}
                   >
-                    <TraineeDetails name={rowData.name} />
+                    <TraineeDetails id={rowData._id} />
                   </div>
                 );
               },

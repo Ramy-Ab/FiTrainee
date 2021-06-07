@@ -25,6 +25,9 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_RESET,
+  TRAINEE_INFO_REQUEST,
+  TRAINEE_INFO_SUCCESS,
+  TRAINEE_INFO_FAIL,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -161,6 +164,22 @@ export const UserTraineeReducer = (state = { trainee: {} }, action) => {
   switch (action.type) {
     case "trainee_info":
       return { trainee: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const traineeInfoReducer = (state = { personelInfo: {} }, action) => {
+  switch (action.type) {
+    case TRAINEE_INFO_REQUEST:
+      return { loading: true };
+
+    case TRAINEE_INFO_SUCCESS:
+      return { loading: false, success: true, personelInfo: action.payload };
+
+    case TRAINEE_INFO_FAIL:
+      return { loading: false, error: action.payload };
 
     default:
       return state;

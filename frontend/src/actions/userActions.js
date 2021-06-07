@@ -25,6 +25,9 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
+  TRAINEE_INFO_REQUEST,
+  TRAINEE_INFO_SUCCESS,
+  TRAINEE_INFO_FAIL,
 } from "../constants/userConstants";
 
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
@@ -299,9 +302,43 @@ export const updateUser = (user) => async (dispatch, getState) => {
   }
 };
 
-export const traineeInfo = (data) => async (dispatch, getState) => {
+export const traineeInfo = (data) => async (dispatch) => {
   dispatch({
     type: "trainee_info",
     payload: data,
   });
+};
+
+export const getTraineeInfo = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TRAINEE_INFO_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/trainee/${id}`, config);
+
+    dispatch({
+      type: TRAINEE_INFO_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: TRAINEE_INFO_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
 };
