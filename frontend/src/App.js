@@ -22,6 +22,11 @@ import OrderListScreen from "./screens/OrderListScreen";
 import FoodAiScreen from "./screens/FoodAiScreen";
 import HomePageScreen from "./screens/HomePageScreen/HomePageScreen";
 import Dashboard from "./screens/Dashboard";
+import TraineeScreen from "./screens/TraineeScreen";
+import traineeOrderScreen from "./screens/traineeOrderScreen";
+import ObjectifScreen from "./screens/ObjectifScreen";
+import ProgressScreen from "./screens/ProgressScreen";
+
 import React from "react";
 
 function App() {
@@ -34,7 +39,12 @@ function App() {
         <Route path="/gym" component={HomePageScreen} exact />
         <Route path="/" component={HomeScreen} exact />
         <Route path="/login" component={LoginScreen} />
-        <Route path="/register" component={RegisterScreen} />
+        <Route path="/register" component={RegisterScreen} exact />
+        <Route path="/trainee" component={TraineeScreen} exact />
+        <Route path="/trainee/orders" component={traineeOrderScreen} />
+        <Route path="/trainee/objectif" component={ObjectifScreen} />
+        <Route path="/trainee/progress" component={ProgressScreen} />
+
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/shipping" component={ShippingScreen} />
         <Route path="/placeorder" component={PlaceOrderScreen} />
