@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getTraineeInfo } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import SideBar from "../components/SideBar";
@@ -31,6 +36,54 @@ const useStyles = makeStyles((theme) => ({
 function TraineeScreen() {
   const classes = useStyles();
 
+  const userDetails = useSelector((state) => state.userDetails);
+  const { error: errorUser, loading: loadingUser, user } = userDetails;
+
+  const traineeInfo = useSelector((state) => state.traineeInfo);
+  const { loading, success, error, personelInfo } = traineeInfo;
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [sex, setSex] = useState("");
+  const [activitie, setActivitie] = useState("");
+  const [experience, setExperience] = useState("");
+  const [equipement, setEquipement] = useState("");
+  const [days, setDays] = useState("");
+  const [healthIssues, setHealthIssues] = useState("");
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    dispatch(getTraineeInfo(userInfo.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (traineeInfo !== undefined) {
+      try {
+        console.log("personelInfo : ", personelInfo);
+        setName(personelInfo.first_name);
+        setEmail(personelInfo.email);
+        setHeight(personelInfo["userProfile"].height);
+        setWeight(personelInfo["userProfile"].weight);
+        setBirthDate(personelInfo["userProfile"].birthDate);
+        setSex(personelInfo["userProfile"].sex);
+        setActivitie(personelInfo["userProfile"].activitie);
+        setExperience(personelInfo["userProfile"].experience);
+        setEquipement(personelInfo["userProfile"].equipement);
+        setHealthIssues(personelInfo["userProfile"].healthIssues);
+        setDays(personelInfo["userProfile"].days);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [success]);
+
   return (
     <div className="traineDash">
       <Row>
@@ -59,7 +112,7 @@ function TraineeScreen() {
                       required
                       type="name"
                       placeholder="Enter name"
-                      // value={name}
+                      value={name}
                       // onChange={(e) => setName(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
@@ -71,7 +124,7 @@ function TraineeScreen() {
                       required
                       type="email"
                       placeholder="Enter Email"
-                      // value={email}
+                      value={email}
                       // onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
@@ -131,7 +184,7 @@ function TraineeScreen() {
                   placeholder="Enter Height"
                   // readOnly
                   className="justify-content-md-center"
-                  // value={height}
+                  value={height}
                 />
               </Col>
               <Col>
@@ -139,7 +192,7 @@ function TraineeScreen() {
                 <Form.Control
                   className="justify-content-md-center"
                   placeholder="Enter Weight"
-                  // value={weight}
+                  value={weight}
                   // readOnly
                 />
               </Col>
@@ -150,7 +203,7 @@ function TraineeScreen() {
                 <Form.Control
                   placeholder="Enter Birthdate"
                   className="justify-content-md-center"
-                  // value={birthDate}
+                  value={birthDate}
                   // readOnly
                 />
               </Col>
@@ -159,7 +212,7 @@ function TraineeScreen() {
                 <Form.Control
                   placeholder="Enter Sex"
                   className="justify-content-md-center"
-                  // value={sex}
+                  value={sex}
                   // readOnly
                 />
               </Col>
@@ -170,7 +223,7 @@ function TraineeScreen() {
                 <Form.Control
                   placeholder="Enter Activitie"
                   className="justify-content-md-center"
-                  // value={activitie}
+                  value={activitie}
                   // readOnly
                 />
               </Col>
@@ -179,7 +232,7 @@ function TraineeScreen() {
                 <Form.Control
                   className="justify-content-md-center"
                   placeholder="Enter Experience"
-                  // value={experience}
+                  value={experience}
                   // readOnly
                 />
               </Col>
@@ -190,7 +243,7 @@ function TraineeScreen() {
                 <Form.Control
                   placeholder="Enter Equipement"
                   className="justify-content-md-center"
-                  // value={equipement}
+                  value={equipement}
                   // readOnly
                 />
               </Col>
@@ -199,7 +252,7 @@ function TraineeScreen() {
                 <Form.Control
                   placeholder="Enter Days"
                   className="justify-content-md-center"
-                  // value={days}
+                  value={days}
                   // readOnly
                 />
               </Col>
@@ -211,7 +264,7 @@ function TraineeScreen() {
                   placeholder="write here"
                   as="textarea"
                   aria-label="With textarea"
-                  // value={healthIssues}
+                  value={healthIssues}
                   // readOnly
                 />
               </Col>
