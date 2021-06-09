@@ -8,6 +8,7 @@ import Message from "../components/Message";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import SideBar from "../components/SideBar";
+import Side from "../components/Side";
 import TraineeOrder from "./traineeOrderScreen";
 import NavbarTrainee from "../components/NavbarTrainee";
 import { Form, Row, Col, InputGroup } from "react-bootstrap";
@@ -87,8 +88,8 @@ function TraineeScreen() {
   return (
     <div className="traineDash">
       <Row>
-        <Col className="col-md-1">
-          <SideBar />
+        <Col className="col-md-2">
+          <Side />
         </Col>
         <Col className="col-md-4 p-5 left">
           <Paper elevation={3}>
@@ -165,13 +166,12 @@ function TraineeScreen() {
             </Row>
           </Paper>
         </Col>
-        <Col className="col-md-6 p-5 left">
+        <Col className="col-md-6   p-5 left">
           <Paper elevation={3}>
-            <Row className="justify-content-center">
-              <h2 style={{ color: "black", marginLeft: "25rem" }}>
-                Personal Info :
-              </h2>
+            <Row className="justify-content-center text-center">
+              <h2 style={{ color: "black !important" }}>Personal Info :</h2>
               <img
+                className="mb-2"
                 src={resume}
                 alt="resume"
                 style={{ height: "70px", weight: "70px" }}

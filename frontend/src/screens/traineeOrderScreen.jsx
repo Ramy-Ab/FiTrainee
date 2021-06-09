@@ -12,6 +12,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useHistory } from "react-router-dom";
 import SideBar from "../components/SideBar";
+import Side from "../components/Side";
 
 function Orders() {
   const dispatch = useDispatch();
@@ -108,10 +109,10 @@ function Orders() {
         <Message variant="danger">{error}</Message>
       ) : (
         <Row>
-          <Col className="col-md-1">
-            <SideBar />
+          <Col className="col-md-2">
+            <Side />
           </Col>
-          <Col className="col-md-11 p-5 center">
+          <Col className="col-md-10 p-5 center">
             <MaterialTable
               title="Material Table"
               title="All Orders"

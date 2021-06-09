@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../images/logo.png";
 import { Link } from "react-scroll";
-import { Link as LinkR } from "react-router-dom";
+import { Link as LinkR, useHistory } from "react-router-dom";
 import { Navbar, Nav, Container, Row, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
 import SearchBox from "./SearchBox";
-function NavBar() {
+function NavBar({ history }) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const dispatch = useDispatch();
+  history = useHistory();
 
   const logoutHandler = () => {
     dispatch(logout());
+    history.push("/");
   };
 
   const [nav, setNav] = useState(false);
@@ -68,7 +70,7 @@ function NavBar() {
 
         {userInfo && !userInfo.isAdmin && (
           <NavDropdown title={userInfo.name} id="username">
-            <LinkContainer to="/profile" className="NavDropdown">
+            <LinkContainer to="/trainee" className="NavDropdown">
               <NavDropdown.Item>Profile</NavDropdown.Item>
             </LinkContainer>
 
