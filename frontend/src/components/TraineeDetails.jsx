@@ -16,6 +16,7 @@ function TraineeDetails({ id }) {
   const [birthDate, setBirthDate] = useState("");
   const [sex, setSex] = useState("");
   const [activitie, setActivitie] = useState("");
+  const [objective, setObjective] = useState("");
   const [experience, setExperience] = useState("");
   const [equipement, setEquipement] = useState("");
   const [days, setDays] = useState("");
@@ -36,6 +37,7 @@ function TraineeDetails({ id }) {
         setBirthDate(personelInfo["userProfile"].birthDate);
         setSex(personelInfo["userProfile"].sex);
         setActivitie(personelInfo["userProfile"].activitie);
+        setObjective(personelInfo["userProfile"].objective);
         setExperience(personelInfo["userProfile"].experience);
         setEquipement(personelInfo["userProfile"].equipement);
         setHealthIssues(personelInfo["userProfile"].healthIssues);
@@ -49,7 +51,7 @@ function TraineeDetails({ id }) {
   return (
     <div>
       <h1>Personal Info :</h1>
-      <Form className="pb-5">
+      <Form className="pb-5 justify-content-md-center">
         <Row className="col-md-6 justify-content-md-center">
           <Col>
             <Form.Label>Name : </Form.Label>
@@ -136,6 +138,18 @@ function TraineeDetails({ id }) {
             <Form.Control
               className="justify-content-md-center"
               value={days}
+              readOnly
+            />
+          </Col>
+        </Row>
+        <Row className="col-md-6 justify-content-md-center">
+          <Col className="col-md-6">
+            <Form.Label>Objective : </Form.Label>
+            <Form.Control
+              placeholder="Enter Objective"
+              className="justify-content-md-center"
+              value={objective}
+              onChange={(e) => setObjective(e.target.value)}
               readOnly
             />
           </Col>

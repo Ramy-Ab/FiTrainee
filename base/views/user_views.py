@@ -107,7 +107,7 @@ def getUserById(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def getTraineeById(request, pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializerWithToken(user, many=False)
@@ -139,3 +139,34 @@ def deleteUser(request, pk):
     userForDeletion = User.objects.get(id=pk)
     userForDeletion.delete()
     return Response('User was deleted')
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateTraineeProfile(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializerWithToken(user, many=False)
+
+    data = request.data
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+
+    if data['password'] != '':
+        user.password = make_password(data['password'])
+
+    user.userprofile.height = data['height']
+    user.userprofile.weight = data['weight']
+    user.userprofile.birthDate = data['birthDate']
+    user.userprofile.sex = data['sex']
+    user.userprofile.activitie = data['activitie']
+    user.userprofile.objective = data['objective']
+    user.userprofile.experience = data['experience']
+    user.userprofile.equipement = data['equipement']
+    user.userprofile.days = data['days']
+    user.userprofile.healthIssues = data['healthIssues']
+
+    user.userprofile.save()
+    user.save()
+
+    return Response(serializer.data)

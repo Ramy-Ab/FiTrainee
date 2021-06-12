@@ -38,7 +38,7 @@ function Orders() {
   }, [Orders]);
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (userInfo) {
       dispatch(listOrders());
       console.log("inside useeffect :     ", orderList["orders"]);
       setData(orderList["orders"]);
@@ -103,31 +103,28 @@ function Orders() {
 
   return (
     <div className="traineeOrder" style={{ fontSize: "10px " }}>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <Row>
-          <Col className="col-md-2">
-            <Side />
-          </Col>
-          <Col className="col-md-10 p-5 center">
-            <MaterialTable
-              title="Material Table"
-              title="All Orders"
-              data={orderListMy["orders"]}
-              columns={columns}
-              options={{
-                filtering: true,
-                exportButton: true,
-                actionsColumnIndex: -1,
-                addRowPosition: "first",
-              }}
-            />
-          </Col>
-        </Row>
-      )}
+      <Row style={{ minHeight: "127vh" }}>
+        <Col className="col-md-2">
+          <Side />
+        </Col>
+        <Col
+          className="col-md-10 p-5 center"
+          style={{ backgroundColor: "#fafafa" }}
+        >
+          <MaterialTable
+            title="Material Table"
+            title="All Orders"
+            data={orderListMy["orders"]}
+            columns={columns}
+            options={{
+              filtering: true,
+              exportButton: true,
+              actionsColumnIndex: -1,
+              addRowPosition: "first",
+            }}
+          />
+        </Col>
+      </Row>
     </div>
   );
 }

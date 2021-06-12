@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getTraineeInfo } from "../actions/userActions";
+import { getTraineeInfo, updateTraineProfile } from "../actions/userActions";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -45,6 +45,8 @@ function TraineeScreen() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -54,6 +56,7 @@ function TraineeScreen() {
   const [equipement, setEquipement] = useState("");
   const [days, setDays] = useState("");
   const [healthIssues, setHealthIssues] = useState("");
+  const [objective, setObjective] = useState("");
 
   const dispatch = useDispatch();
 
@@ -62,12 +65,13 @@ function TraineeScreen() {
 
   useEffect(() => {
     dispatch(getTraineeInfo(userInfo.id));
+    console.log("dispatched");
   }, [dispatch]);
 
   useEffect(() => {
     if (traineeInfo !== undefined) {
       try {
-        console.log("personelInfo : ", personelInfo);
+        console.log("personelInfo : ", traineeInfo);
         setName(personelInfo.first_name);
         setEmail(personelInfo.email);
         setHeight(personelInfo["userProfile"].height);
@@ -79,11 +83,49 @@ function TraineeScreen() {
         setEquipement(personelInfo["userProfile"].equipement);
         setHealthIssues(personelInfo["userProfile"].healthIssues);
         setDays(personelInfo["userProfile"].days);
+        setObjective(personelInfo["userProfile"].objective);
       } catch (error) {
         console.log(error);
       }
     }
   }, [success]);
+
+  const handleUpdate = () => {
+    dispatch(
+      updateTraineProfile(
+        {
+          name: name,
+          email: email,
+          password: password,
+          height: height,
+          weight: weight,
+          birthDate: birthDate,
+          sex: sex,
+          activitie: activitie,
+          experience: experience,
+          equipement: equipement,
+          days: days,
+          healthIssues: healthIssues,
+          objective: objective,
+        },
+        37
+      )
+    );
+  };
+  console.log("printing info :", {
+    name: name,
+    email: email,
+    password: password,
+    height: height,
+    weight: weight,
+    birthDate: birthDate,
+    sex: sex,
+    activitie: activitie,
+    experience: experience,
+    equipement: equipement,
+    days: days,
+    healthIssues: healthIssues,
+  });
 
   return (
     <div className="traineDash">
@@ -114,7 +156,7 @@ function TraineeScreen() {
                       type="name"
                       placeholder="Enter name"
                       value={name}
-                      // onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
 
@@ -126,7 +168,7 @@ function TraineeScreen() {
                       type="email"
                       placeholder="Enter Email"
                       value={email}
-                      // onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
 
@@ -136,8 +178,8 @@ function TraineeScreen() {
                       size="lg"
                       type="password"
                       placeholder="Enter Password"
-                      // value={password}
-                      // onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
 
@@ -147,8 +189,8 @@ function TraineeScreen() {
                       size="lg"
                       type="password"
                       placeholder="Confirm Password"
-                      // value={confirmPassword}
-                      // onChange={(e) => setConfirmPassword(e.target.value)}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                     ></Form.Control>
                   </Form.Group>
 
@@ -158,6 +200,7 @@ function TraineeScreen() {
                     color="primary"
                     size="large"
                     startIcon={<SaveIcon />}
+                    onClick={handleUpdate}
                   >
                     Update
                   </Button>
@@ -185,6 +228,7 @@ function TraineeScreen() {
                   // readOnly
                   className="justify-content-md-center"
                   value={height}
+                  onChange={(e) => setHeight(e.target.value)}
                 />
               </Col>
               <Col>
@@ -193,6 +237,7 @@ function TraineeScreen() {
                   className="justify-content-md-center"
                   placeholder="Enter Weight"
                   value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -204,6 +249,7 @@ function TraineeScreen() {
                   placeholder="Enter Birthdate"
                   className="justify-content-md-center"
                   value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -213,6 +259,7 @@ function TraineeScreen() {
                   placeholder="Enter Sex"
                   className="justify-content-md-center"
                   value={sex}
+                  onChange={(e) => setSex(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -224,6 +271,7 @@ function TraineeScreen() {
                   placeholder="Enter Activitie"
                   className="justify-content-md-center"
                   value={activitie}
+                  onChange={(e) => setActivitie(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -233,6 +281,7 @@ function TraineeScreen() {
                   className="justify-content-md-center"
                   placeholder="Enter Experience"
                   value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -244,6 +293,7 @@ function TraineeScreen() {
                   placeholder="Enter Equipement"
                   className="justify-content-md-center"
                   value={equipement}
+                  onChange={(e) => setEquipement(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -253,6 +303,19 @@ function TraineeScreen() {
                   placeholder="Enter Days"
                   className="justify-content-md-center"
                   value={days}
+                  onChange={(e) => setDays(e.target.value)}
+                  // readOnly
+                />
+              </Col>
+            </Row>
+            <Row className="col-md-12 justify-content-md-center">
+              <Col className="col-md-6">
+                <Form.Label>Objective : </Form.Label>
+                <Form.Control
+                  placeholder="Enter Objective"
+                  className="justify-content-md-center"
+                  value={objective}
+                  onChange={(e) => setObjective(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -265,6 +328,7 @@ function TraineeScreen() {
                   as="textarea"
                   aria-label="With textarea"
                   value={healthIssues}
+                  onChange={(e) => setHealthIssues(e.target.value)}
                   // readOnly
                 />
               </Col>

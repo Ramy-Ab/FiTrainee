@@ -28,6 +28,9 @@ import {
   TRAINEE_INFO_REQUEST,
   TRAINEE_INFO_SUCCESS,
   TRAINEE_INFO_FAIL,
+  TRAINEE_UPDATE_REQUEST,
+  TRAINEE_UPDATE_SUCCESS,
+  TRAINEE_UPDATE_FAIL,
 } from "../constants/userConstants";
 
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
@@ -325,16 +328,63 @@ export const getTraineeInfo = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-
+    console.log("before axios");
     const { data } = await axios.get(`/api/users/trainee/${id}`, config);
+    console.log("data in action : ", data);
 
     dispatch({
       type: TRAINEE_INFO_SUCCESS,
       payload: data,
     });
   } catch (error) {
+    console.log("eror dispatch : ", error);
     dispatch({
       type: TRAINEE_INFO_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const updateTraineProfile = (user, id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TRAINEE_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/users/updatetrainee/${id}/`,
+      user,
+      config
+    );
+
+    dispatch({
+      type: TRAINEE_UPDATE_SUCCESS,
+      payload: data,
+    });
+
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: TRAINEE_UPDATE_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
