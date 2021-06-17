@@ -102,7 +102,7 @@ function Orders() {
   ];
 
   return (
-    <div className="traineeOrder" style={{ fontSize: "10px " }}>
+    <div className="traineDash" style={{ fontSize: "10px " }}>
       <Row style={{ minHeight: "127vh" }}>
         <Col className="col-md-2">
           <Side />

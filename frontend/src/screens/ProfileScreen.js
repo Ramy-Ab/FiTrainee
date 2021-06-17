@@ -17,7 +17,7 @@ function ProfileScreen({ history }) {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()  
 
     const userDetails = useSelector(state => state.userDetails)
     const { error, loading, user } = userDetails

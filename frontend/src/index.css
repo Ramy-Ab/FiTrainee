@@ -15,7 +15,6 @@ main.py-3-main {
   min-height: 125vh;
 }
 
-.pt-3,
 .py-3-main {
   padding-top: 0;
   background-color: rgb(0, 0, 0);
@@ -582,4 +581,71 @@ h7 {
 
 .row > * {
   flex-shrink: 1;
+}
+
+div.ant-progress-circle,
+div.ant-progress-line {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+[class*="-col-rtl"] div.ant-progress-circle,
+[class*="-col-rtl"] div.ant-progress-line {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.h-black {
+  color: black !important;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+.flex-left {
+  display: flex;
+  align-items: flex-start;
+}
+.fullWidth {
+  width: 100%;
+}
+
+.currentGoals .goals,
+.pastGoals .goals {
+  padding-bottom: 32px;
+  overflow: auto;
+}
+.layout__constrained {
+  box-sizing: border-box;
+  padding-right: calc(100% - 672px);
+}
+.fullContent {
+  height: 100%;
+  width: 100%;
+}
+
+.goalTile {
+  box-sizing: border-box;
+  border: 1px solid #eaeaea;
+  padding-bottom: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-left {
+  display: flex;
+  align-items: flex-start;
+}
+
+.add-food-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: red;
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  cursor: pointer;
 }

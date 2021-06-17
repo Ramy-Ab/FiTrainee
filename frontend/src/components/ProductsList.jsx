@@ -295,7 +295,12 @@ export const ProductsList = ({ history, match }) => {
                 onClick: () => {
                   setShow(true);
                   console.log("rowdata : ", rowData._id);
+                  let id;
                   setProductId(rowData._id);
+                  //   setProductId((prevState) => {
+
+                  //       return rowData._id
+                  //   })
                   console.log("product id : ", productId);
 
                   //   if (

@@ -638,4 +638,5 @@ nav .menu-btn,
 }
 .nav {
   background-color: #171515;
+  max-height: 3.5rem;
 }
