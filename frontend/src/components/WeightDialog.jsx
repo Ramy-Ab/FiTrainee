@@ -10,9 +10,7 @@ import { useTheme } from "@material-ui/core/styles";
 
 export default function WeightDialog({ openedWeight }) {
   const [openWeight, setOpenWeight] = React.useState(openedWeight);
-  {
-    console.log("openWeight in dialog: ", openWeight);
-  }
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -26,9 +24,8 @@ export default function WeightDialog({ openedWeight }) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open responsive dialog
-      </Button>
+      {console.log("openWeight in dialog: ", openWeight)}
+
       <Dialog
         fullScreen={fullScreen}
         open={openWeight}

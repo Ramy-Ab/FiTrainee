@@ -45,7 +45,7 @@ import WeightDialog from "../components/WeightDialog";
 const Search = Input.Search;
 
 function ObjectifScreen() {
-  const [openWeight, setOpenWeight] = React.useState(false);
+  const [openWeight, setOpenWeight] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -58,7 +58,10 @@ function ObjectifScreen() {
     setOpen(false);
   };
 
-  useEffect(() => {}, [openWeight]);
+  const handleWeight = () => {
+    // setOpenWeight((prevOpenWeight) => !prevOpenWeight);
+    setOpenWeight(true);
+  };
 
   // food recognition
   const [result, setResult] = useState("");
@@ -219,7 +222,7 @@ function ObjectifScreen() {
                       src={edit}
                       alt="edit"
                       style={{ cursor: "pointer" }}
-                      onClick={() => setOpenWeight(true)}
+                      onClick={handleWeight}
                     />
                   </div>
                 </Col>
@@ -453,6 +456,7 @@ function ObjectifScreen() {
         </Dialog>
         {console.log("openWeight : ", openWeight)}
         <WeightDialog openedWeight={openWeight} />
+        {console.log("openWeight : ", openWeight)}
       </div>
     </div>
   );
