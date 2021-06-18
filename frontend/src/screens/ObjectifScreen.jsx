@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import SideBar from "../components/SideBar";
@@ -7,6 +7,8 @@ import { Divider as antDivider } from "antd";
 import "./FoodAiScreen.css";
 import upload from "../images/upload-photo.png";
 import {
+  InputGroup,
+  FormControl,
   Button as RButton,
   Alert,
   Spinner,
@@ -27,7 +29,9 @@ import { Progress } from "antd";
 import { Input } from "antd";
 import "antd/dist/antd.css";
 import objectif from "../assets/objectif.svg";
+import scale from "../assets/scale.svg";
 import addFood from "../assets/adding.svg";
+import edit from "../assets/edit.svg";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -36,10 +40,12 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
+import WeightDialog from "../components/WeightDialog";
 
 const Search = Input.Search;
 
 function ObjectifScreen() {
+  const [openWeight, setOpenWeight] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -51,6 +57,8 @@ function ObjectifScreen() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {}, [openWeight]);
 
   // food recognition
   const [result, setResult] = useState("");
@@ -184,6 +192,47 @@ function ObjectifScreen() {
             </p>
           </div>
           <div className="goals fullContent layout__constrained">
+            {/* setweight */}
+            <div className="goalTile flex-left flex-column">
+              <Row className="p-3 col-md-12">
+                <Col className="col-md-2">
+                  <img
+                    src={scale}
+                    alt="weight"
+                    style={{ height: "40px", width: "40px" }}
+                  />
+                </Col>
+                <Col className="col-md-8">
+                  <p
+                    style={{
+                      color: "#303133",
+                      fontSize: "18px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    Weight goal
+                  </p>
+                </Col>
+                <Col className="col-md-1 mr-0 ml-5">
+                  <div className="mb-2 ">
+                    <img
+                      src={edit}
+                      alt="edit"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => setOpenWeight(true)}
+                    />
+                  </div>
+                </Col>
+              </Row>
+              <Row className="col-md-12 px-5">
+                <span style={{ display: "flex", justifyContent: "center" }}>
+                  <Progress percent={100} />
+                  <p style={{ color: "black", fontSize: "16px" }}>Calories</p>
+                </span>
+              </Row>
+            </div>
+            {/* finset weight */}
+
             <div className="goalTile flex-left flex-column">
               <Row className="p-3 col-md-12">
                 <Col className="col-md-2">
@@ -204,19 +253,9 @@ function ObjectifScreen() {
                     Daily nutrition goal
                   </p>
                 </Col>
-                <Col className="col-md-1">
+                <Col className="col-md-1 mr-0 ml-5">
                   <div className="mb-2 ">
-                    <DropdownButton
-                      as={ButtonGroup}
-                      key="end"
-                      id={`dropdown-button-drop-end`}
-                      drop="end"
-                      variant="secondary"
-                      title={""}
-                    >
-                      <Dropdown.Item eventKey="1">Edit</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Delete</Dropdown.Item>
-                    </DropdownButton>
+                    <img src={edit} alt="edit" style={{ cursor: "pointer" }} />
                   </div>
                 </Col>
               </Row>
@@ -283,114 +322,101 @@ function ObjectifScreen() {
               You can choose between adding food by typing name or uploading
               your food image
             </DialogContentText>
-            <div style={{ display: "flex" }}>
-              <Form inline className="text-center justify-content-center mt-2">
-                <Form.Control
-                  placeHolder="search ..."
-                  type="text"
-                  name="q"
-                  // onChange={(e) => }
-                  className="mr-sm-2 ml-sm-5"
-                ></Form.Control>
+            <Form.Label htmlFor="inlineFormInputGroupUsername2" srOnly>
+              weight
+            </Form.Label>
+            <InputGroup
+              className="mb-2 col-md-6 text-center"
+              style={{ left: "25%" }}
+            >
+              <FormControl
+                id="inlineFormInputGroupUsername2"
+                placeholder="your food weight .."
+              />
+              <InputGroup.Prepend>
+                <InputGroup.Text style={{ marginLeft: "0" }}>g</InputGroup.Text>
+              </InputGroup.Prepend>
+            </InputGroup>
+            <div>
+              <Row>
+                <Form
+                  inline
+                  className="text-center justify-content-center mt-2"
+                >
+                  <Form.Control
+                    placeHolder="search ..."
+                    type="text"
+                    name="q"
+                    // onChange={(e) => }
+                    className="mr-sm-2 ml-sm-5"
+                  ></Form.Control>
 
-                <i class="fas fa-search ml-1"></i>
-              </Form>
+                  <i class="fas fa-search ml-1"></i>
+                </Form>
+              </Row>
               <p className="h-black mt-4 ml-2">Or</p>
-              <Button variant="primary" onClick={onUploadButton}>
-                {send && (
-                  <Spinner
-                    as="span"
-                    animation="grow"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                )}
-                {"    "}
-                {send ? "...Loading" : "Send"}
-              </Button>
             </div>
-            <div className="col-sm-7">
-              <h5>You can upload your photo</h5>
+            <Row className="text-center">
+              <div className="col-sm-7 text-center" style={{ left: "25%" }}>
+                <div
+                  className="image-dropbox"
+                  onChange={() => {
+                    setDisplay(false);
+                    console.log("display : ", display);
+                  }}
+                >
+                  {display && (
+                    <div
+                      className="placeholder"
+                      {...getRootProps()}
+                      style={{ display: { display } ? "block" : "none" }}
+                    >
+                      <img src={upload} />
+                      <input {...getInputProps()} />
+                      {isDragAActive ? (
+                        <p>Drop the Image here ...</p>
+                      ) : (
+                        <p className="h-black">Tap here to add your food </p>
+                      )}
+                    </div>
+                  )}
+                  <h3>{result}</h3>
+                  <div className="previews" onChange={hideDropBox}>
+                    {Image.map((upFile) => {
+                      //   blobToBase64(Image[0]).then((res) => {
+                      //     sendData(res);
+                      //   });
+                      return (
+                        <img
+                          key={Math.floor(Math.random() * 10)}
+                          src={upFile.preview}
+                          style={{
+                            width: "639.5px",
+                            height: "353px",
+                            border: "3px solid #ccc",
+                          }}
+                          alt="preview"
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
 
-              <div
-                className="image-dropbox"
-                onChange={() => {
-                  setDisplay(false);
-                  console.log("display : ", display);
-                }}
-              >
-                {display && (
-                  <div
-                    className="placeholder"
-                    {...getRootProps()}
-                    style={{ display: { display } ? "block" : "none" }}
-                  >
-                    <img src={upload} />
+                <div className="upload-section ">
+                  <a className="fileUpload button" {...getRootProps()}>
                     <input {...getInputProps()} />
                     {isDragAActive ? (
                       <p>Drop the Image here ...</p>
                     ) : (
-                      <p>Add your image here </p>
+                      <p style={{ color: "white", marginBottom: "0" }}>
+                        Upload{" "}
+                      </p>
                     )}
-                  </div>
-                )}
-                <h3>{result}</h3>
-                <div className="previews" onChange={hideDropBox}>
-                  {Image.map((upFile) => {
-                    //   blobToBase64(Image[0]).then((res) => {
-                    //     sendData(res);
-                    //   });
-                    return (
-                      <img
-                        key={Math.floor(Math.random() * 10)}
-                        src={upFile.preview}
-                        style={{
-                          width: "639.5px",
-                          height: "353px",
-                          border: "3px solid #ccc",
-                        }}
-                        alt="preview"
-                      />
-                    );
-                  })}
+                  </a>
                 </div>
+                <div className="url-section">URL Section</div>
               </div>
-
-              <div className="upload-section ">
-                <a className="fileUpload button" {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  {isDragAActive ? (
-                    <p>Drop the Image here ...</p>
-                  ) : (
-                    <p style={{ color: "white", marginBottom: "0" }}>Upload </p>
-                  )}
-                </a>
-
-                <Button variant="primary" onClick={onUploadButton}>
-                  {send && (
-                    <Spinner
-                      as="span"
-                      animation="grow"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  )}
-                  {"    "}
-                  {send ? "...Loading" : "Send"}
-                </Button>
-                <br />
-                <br />
-
-                <p clas="notice">
-                  Note: By uploading files here you agree to have them
-                  temporarily stored in our training dataset to make it better
-                  for you
-                </p>
-              </div>
-              <div className="url-section">URL Section</div>
-            </div>
+            </Row>
           </DialogContent>
           <DialogActions style={{ display: "flex", justifyContent: "center" }}>
             <Button
@@ -403,8 +429,30 @@ function ObjectifScreen() {
             >
               Save
             </Button>
+            <RButton variant="primary" onClick={onUploadButton}>
+              {send && (
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              )}
+              {"    "}
+              {send ? (
+                "...Loading"
+              ) : (
+                <div>
+                  <SaveIcon />
+                  Send
+                </div>
+              )}
+            </RButton>
           </DialogActions>
         </Dialog>
+        {console.log("openWeight : ", openWeight)}
+        <WeightDialog openedWeight={openWeight} />
       </div>
     </div>
   );
