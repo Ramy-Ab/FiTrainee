@@ -38,7 +38,7 @@ export default function NutritionsDialog({ openedNutritions }) {
 
       <Dialog
         fullScreen={fullScreen}
-        open={openNutritions}
+        open={openedNutritions}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >

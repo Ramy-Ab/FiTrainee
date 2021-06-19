@@ -44,7 +44,7 @@ const Search = Input.Search;
 
 function ObjectifScreen() {
   const [openWeight, setOpenWeight] = React.useState(false);
-  const [openNutritions, setOpenNutritions] = React.useState(true);
+  const [openNutritions, setOpenNutritions] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -332,8 +332,9 @@ function ObjectifScreen() {
                   100 g
                 </p>
               </Col>
-              <Col className="col-md-2">
+              <Col className="col-md-2 progress50">
                 <Progress
+                  className=""
                   style={{ height: "50px", weight: "50px" }}
                   type="circle"
                   percent={75}

@@ -137,7 +137,7 @@ function TraineeScreen() {
           <Paper elevation={3}>
             <Row className="justify-content-center">
               <Col md={10} className="text-center justify-content-center">
-                <h2 style={{ color: "black" }}>User Profile</h2>
+                <h2 className="h-black">User Profile</h2>
                 <img
                   src={profilIcon}
                   alt="profileIcon"
@@ -212,7 +212,7 @@ function TraineeScreen() {
         <Col className="col-md-6   p-5 left">
           <Paper elevation={3}>
             <Row className="justify-content-center text-center">
-              <h2 style={{ color: "black !important" }}>Personal Info :</h2>
+              <h2 className="h-black">Personal Info :</h2>
               <img
                 className="mb-2"
                 src={resume}

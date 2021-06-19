@@ -650,7 +650,7 @@ div.ant-progress-line {
   cursor: pointer;
 }
 
-.ant-progress-inner {
+.progress50 .ant-progress-inner {
   height: 50px !important;
   width: 50px !important;
   font-size: 12px !important;

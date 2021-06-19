@@ -38,7 +38,7 @@ export default function WeightDialog({ openedWeight }) {
 
       <Dialog
         fullScreen={fullScreen}
-        open={openWeight}
+        open={openedWeight}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
