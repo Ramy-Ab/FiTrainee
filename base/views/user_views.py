@@ -46,6 +46,7 @@ def registerUser(request):
         user=user,
         height=data['height'],
         weight=data['weight'],
+        weightGoal=data['weightGoal'],
         birthDate=data['birthDate'],
         sex=data['sex'],
         activitie=data['activitie'],
@@ -157,6 +158,7 @@ def updateTraineeProfile(request, pk):
 
     user.userprofile.height = data['height']
     user.userprofile.weight = data['weight']
+    user.userprofile.weightGoal = data['weightGoal']
     user.userprofile.birthDate = data['birthDate']
     user.userprofile.sex = data['sex']
     user.userprofile.activitie = data['activitie']

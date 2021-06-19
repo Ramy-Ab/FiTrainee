@@ -36,6 +36,7 @@ export default function BasicButtonGroup() {
 
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+  const [weightGoal, setWeightGoal] = useState("");
 
   const handleDateChange = (date) => {
     setBirthDate(date);
@@ -45,8 +46,10 @@ export default function BasicButtonGroup() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(traineeInfo({ ...trainee, height, weight, birthDate, sex }));
-  }, [height, weight, birthDate, sex]);
+    dispatch(
+      traineeInfo({ ...trainee, height, weight, weightGoal, birthDate, sex })
+    );
+  }, [height, weight, weightGoal, birthDate, sex]);
 
   return (
     <div className={classes.root}>
@@ -98,6 +101,15 @@ export default function BasicButtonGroup() {
           value={weight}
           onChange={(e) => {
             setWeight(e.target.value);
+          }}
+        />
+        Kg
+        <TextField
+          id="standard-basic"
+          label="weight Goal"
+          value={weightGoal}
+          onChange={(e) => {
+            setWeightGoal(e.target.value);
           }}
         />
         Kg

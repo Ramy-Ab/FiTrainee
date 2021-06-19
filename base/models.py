@@ -78,6 +78,8 @@ class UserProfile(models.Model):
         max_digits=7, decimal_places=2, null=True, blank=True)
     weight = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
+    weightGoal = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
     birthDate = models.DateTimeField(null=True, blank=True)
     sex = models.CharField(max_length=200, null=True, blank=True)
     activitie = models.CharField(max_length=200, null=True, blank=True)

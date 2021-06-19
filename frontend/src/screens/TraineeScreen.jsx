@@ -49,6 +49,7 @@ function TraineeScreen() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+  const [weightGoal, setWeightGoal] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [sex, setSex] = useState("");
   const [activitie, setActivitie] = useState("");
@@ -76,6 +77,7 @@ function TraineeScreen() {
         setEmail(personelInfo.email);
         setHeight(personelInfo["userProfile"].height);
         setWeight(personelInfo["userProfile"].weight);
+        setWeightGoal(personelInfo["userProfile"].weightGoal);
         setBirthDate(personelInfo["userProfile"].birthDate);
         setSex(personelInfo["userProfile"].sex);
         setActivitie(personelInfo["userProfile"].activitie);
@@ -99,6 +101,7 @@ function TraineeScreen() {
           password: password,
           height: height,
           weight: weight,
+          weightGoal: weightGoal,
           birthDate: birthDate,
           sex: sex,
           activitie: activitie,
@@ -242,6 +245,19 @@ function TraineeScreen() {
                 />
               </Col>
             </Row>
+            <Row className="col-md-6 justify-content-md-center">
+              <Col>
+                <Form.Label>Weight Goal : </Form.Label>
+                <Form.Control
+                  className="justify-content-md-center"
+                  placeholder="Enter Weight Goal"
+                  value={weightGoal}
+                  onChange={(e) => setWeightGoal(e.target.value)}
+                  // readOnly
+                />
+              </Col>
+            </Row>
+
             <Row className="col-md-12 justify-content-md-center">
               <Col className="col-md-4">
                 <Form.Label>Birthdate : </Form.Label>

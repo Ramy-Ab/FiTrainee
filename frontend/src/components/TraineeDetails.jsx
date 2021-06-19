@@ -13,6 +13,7 @@ function TraineeDetails({ id }) {
   const [email, setEmail] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+  const [weightGoal, setWeightGoal] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [sex, setSex] = useState("");
   const [activitie, setActivitie] = useState("");
@@ -34,6 +35,7 @@ function TraineeDetails({ id }) {
         setEmail(personelInfo.email);
         setHeight(personelInfo["userProfile"].height);
         setWeight(personelInfo["userProfile"].weight);
+        setWeightGoal(personelInfo["userProfile"].weightGoal);
         setBirthDate(personelInfo["userProfile"].birthDate);
         setSex(personelInfo["userProfile"].sex);
         setActivitie(personelInfo["userProfile"].activitie);
@@ -84,6 +86,16 @@ function TraineeDetails({ id }) {
             <Form.Control
               className="justify-content-md-center"
               value={weight}
+              readOnly
+            />
+          </Col>
+        </Row>
+        <Row className="col-md-3 justify-content-md-center">
+          <Col>
+            <Form.Label>Weight Goal : </Form.Label>
+            <Form.Control
+              className="justify-content-md-center"
+              value={weightGoal}
               readOnly
             />
           </Col>
