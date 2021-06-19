@@ -31,6 +31,9 @@ import {
   TRAINEE_UPDATE_REQUEST,
   TRAINEE_UPDATE_SUCCESS,
   TRAINEE_UPDATE_FAIL,
+  TRAINEE_UPDATE_WEIGHT_REQUEST,
+  TRAINEE_UPDATE_WEIGHT_SUCCESS,
+  TRAINEE_UPDATE_WEIGHT_FAIL,
 } from "../constants/userConstants";
 
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
@@ -382,6 +385,44 @@ export const updateTraineProfile = (user, id) => async (dispatch, getState) => {
     });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: TRAINEE_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+};
+
+export const updateTraineWeight = (user, id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TRAINEE_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/users/updateweight/${id}/`,
+      user,
+      config
+    );
+
+    dispatch({
+      type: TRAINEE_UPDATE_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     dispatch({
       type: TRAINEE_UPDATE_FAIL,

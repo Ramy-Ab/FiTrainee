@@ -31,6 +31,9 @@ import {
   TRAINEE_UPDATE_REQUEST,
   TRAINEE_UPDATE_SUCCESS,
   TRAINEE_UPDATE_FAIL,
+  TRAINEE_UPDATE_WEIGHT_REQUEST,
+  TRAINEE_UPDATE_WEIGHT_SUCCESS,
+  TRAINEE_UPDATE_WEIGHT_FAIL,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -198,6 +201,22 @@ export const traineeUpdateReducer = (state = {}, action) => {
       return { loading: false, success: true };
 
     case TRAINEE_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const updateWeightReducer = (state = {}, action) => {
+  switch (action.type) {
+    case TRAINEE_UPDATE_WEIGHT_REQUEST:
+      return { loading: true };
+
+    case TRAINEE_UPDATE_WEIGHT_SUCCESS:
+      return { loading: false, success: true };
+
+    case TRAINEE_UPDATE_WEIGHT_FAIL:
       return { loading: false, error: action.payload };
 
     default:

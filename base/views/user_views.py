@@ -172,3 +172,21 @@ def updateTraineeProfile(request, pk):
     user.save()
 
     return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateTraineeWeight(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializerWithToken(user, many=False)
+
+    data = request.data
+
+
+    user.userprofile.weight = data['weight']
+    user.userprofile.weightGoal = data['weightGoal']
+   
+    user.userprofile.save()
+    user.save()
+
+    return Response(serializer.data)

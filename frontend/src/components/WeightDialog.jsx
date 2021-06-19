@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getTraineeInfo, updateTraineWeight } from "../actions/userActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -19,7 +21,37 @@ import {
 } from "react-bootstrap";
 
 export default function WeightDialog({ openedWeight }) {
+  const userDetails = useSelector((state) => state.userDetails);
+  const { error: errorUser, loading: loadingUser, user } = userDetails;
+
+  const traineeInfo = useSelector((state) => state.traineeInfo);
+  const { loading, success, error, personelInfo } = traineeInfo;
+
   const [openWeight, setOpenWeight] = React.useState(openedWeight);
+  const [weight, setWeight] = useState("");
+  const [weightGoal, setWeightGoal] = useState("");
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    dispatch(getTraineeInfo(userInfo.id));
+    console.log("dispatched");
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (traineeInfo !== undefined) {
+      try {
+        console.log("personelInfo : ", traineeInfo);
+        setWeight(personelInfo["userProfile"].weight);
+        setWeightGoal(personelInfo["userProfile"].weightGoal);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [success]);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -29,6 +61,19 @@ export default function WeightDialog({ openedWeight }) {
   };
 
   const handleClose = () => {
+    setOpenWeight(false);
+  };
+
+  const handleUpdate = () => {
+    dispatch(
+      updateTraineWeight(
+        {
+          weight: weight,
+          weightGoal: weightGoal,
+        },
+        37
+      )
+    );
     setOpenWeight(false);
   };
 
@@ -62,6 +107,8 @@ export default function WeightDialog({ openedWeight }) {
             <FormControl
               id="inlineFormInputGroupUsername2"
               placeholder="your actual weight ..."
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
             />
             <InputGroup.Prepend>
               <InputGroup.Text style={{ marginLeft: "0" }}>kg</InputGroup.Text>
@@ -75,6 +122,8 @@ export default function WeightDialog({ openedWeight }) {
             <FormControl
               id="inlineFormInputGroupUsername2"
               placeholder="your goal weight ..."
+              value={weightGoal}
+              onChange={(e) => setWeightGoal(e.target.value)}
             />
             <InputGroup.Prepend>
               <InputGroup.Text style={{ marginLeft: "0" }}>kg</InputGroup.Text>
@@ -87,7 +136,7 @@ export default function WeightDialog({ openedWeight }) {
             variant="contained"
             color="primary"
             size="large"
-            onClick={handleClose}
+            onClick={handleUpdate}
             startIcon={<SaveIcon />}
           >
             Save
