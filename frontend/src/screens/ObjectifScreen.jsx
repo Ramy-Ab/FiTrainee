@@ -10,14 +10,10 @@ import {
   InputGroup,
   FormControl,
   Button as RButton,
-  Alert,
   Spinner,
   Form,
   Row,
   Col,
-  Dropdown,
-  DropdownButton,
-  ButtonGroup,
 } from "react-bootstrap";
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 import Paper from "@material-ui/core/Paper";
@@ -32,6 +28,7 @@ import objectif from "../assets/objectif.svg";
 import scale from "../assets/scale.svg";
 import addFood from "../assets/adding.svg";
 import edit from "../assets/edit.svg";
+import diet from "../assets/diet.svg";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -41,11 +38,13 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import WeightDialog from "../components/WeightDialog";
+import NutritionsDialog from "../components/NutritionsDialog";
 
 const Search = Input.Search;
 
 function ObjectifScreen() {
-  const [openWeight, setOpenWeight] = React.useState(true);
+  const [openWeight, setOpenWeight] = React.useState(false);
+  const [openNutritions, setOpenNutritions] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -61,6 +60,10 @@ function ObjectifScreen() {
   const handleWeight = () => {
     // setOpenWeight((prevOpenWeight) => !prevOpenWeight);
     setOpenWeight(true);
+  };
+
+  const handleNutritions = () => {
+    setOpenNutritions(true);
   };
 
   // food recognition
@@ -258,7 +261,12 @@ function ObjectifScreen() {
                 </Col>
                 <Col className="col-md-1 mr-0 ml-5">
                   <div className="mb-2 ">
-                    <img src={edit} alt="edit" style={{ cursor: "pointer" }} />
+                    <img
+                      src={edit}
+                      alt="edit"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleNutritions}
+                    />
                   </div>
                 </Col>
               </Row>
@@ -278,26 +286,61 @@ function ObjectifScreen() {
               </Row>
             </div>
           </div>
-          <Divider style={{ backgroundColor: "black" }} />
-          <Row className="col-md-12">
-            <Col className="col-md-10">
-              <div class="fullWidth flex-left flex-column">
-                <h3 className="h-black"> Meal Plan </h3>
-                <p style={{ color: "#797c80", fontSize: "14px" }}>
-                  Here You can set your objectifs and track your progress based
-                  on your daily nutrition goal .
+          <Divider style={{ backgroundColor: "black" }} className="m-3" />
+
+          <Row style={{ position: "absolute" }} className="mt-5 mb-5 col-md-12">
+            <Row className="col-md-12">
+              <Col className="col-md-10">
+                <div class="fullWidth flex-left flex-column">
+                  <h3 className="h-black"> Meal Plan </h3>
+                  <p style={{ color: "#797c80", fontSize: "14px" }}>
+                    Here You can set your objectifs and track your progress
+                    based on your daily nutrition goal .
+                  </p>
+                </div>
+              </Col>
+              <Col
+                className="col-md-2 pt-2"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <div className="add-food-btn" onClick={handleClickOpen}>
+                  <img src={addFood} alt="add Food" />
+                </div>
+                <h6 className="h-black pt-3 pl-2"> Add Food</h6>
+              </Col>
+            </Row>
+            <Row className="col-md-12 ">
+              <Col className="col-md-1">
+                <img src={diet} alt="diet" style={{ height: "50px" }} />
+              </Col>
+              <Col className="col-md-4 mt-1">
+                <p
+                  style={{
+                    marginBottom: "auto",
+                    color: "#303133",
+                    fontSize: "18px",
+                  }}
+                >
+                  Pizza
                 </p>
-              </div>
-            </Col>
-            <Col
-              className="col-md-2 pt-2"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <div className="add-food-btn" onClick={handleClickOpen}>
-                <img src={addFood} alt="add Food" />
-              </div>
-              <h6 className="h-black pt-3 pl-2"> Add Food</h6>
-            </Col>
+                <p
+                  style={{
+                    color: "#303333",
+                    fontSize: "11px",
+                  }}
+                >
+                  100 g
+                </p>
+              </Col>
+              <Col className="col-md-2">
+                <Progress
+                  style={{ height: "50px", weight: "50px" }}
+                  type="circle"
+                  percent={75}
+                  format={(percent) => `${percent} Calories`}
+                />
+              </Col>
+            </Row>
           </Row>
         </Col>
       </Row>
@@ -457,6 +500,7 @@ function ObjectifScreen() {
         {console.log("openWeight : ", openWeight)}
         <WeightDialog openedWeight={openWeight} />
         {console.log("openWeight : ", openWeight)}
+        <NutritionsDialog openedNutritions={openNutritions} />
       </div>
     </div>
   );

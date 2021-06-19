@@ -733,3 +733,6 @@ a:hover,
 .foodai-li {
   align-items: center !important;
 }
+.item-info-a {
+  color: rgb(255, 255, 255) !important;
+}
