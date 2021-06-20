@@ -1,4 +1,4 @@
-from base.models import UserProfile
+from base.models import UserProfile, UserWeight
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
@@ -182,11 +182,27 @@ def updateTraineeWeight(request, pk):
 
     data = request.data
 
-
     user.userprofile.weight = data['weight']
     user.userprofile.weightGoal = data['weightGoal']
-   
+
     user.userprofile.save()
     user.save()
 
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addTraineeWeight(request, pk):
+
+    user = User.objects.get(id=pk)
+    data = request.data
+
+    weight = UserWeight.objects.create(
+        userprofile=user.userprofile,
+        weight=data['weight'],
+    )
+
+    weight.save()
+    user.save()
+    return Response('weight Added')

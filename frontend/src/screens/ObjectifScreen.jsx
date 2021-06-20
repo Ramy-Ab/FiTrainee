@@ -499,9 +499,15 @@ function ObjectifScreen() {
           </DialogActions>
         </Dialog>
         {console.log("openWeight : ", openWeight)}
-        <WeightDialog openedWeight={openWeight} />
+        <WeightDialog
+          setOpenWeight={(op) => setOpenWeight(op)}
+          openedWeight={openWeight}
+        />
         {console.log("openWeight : ", openWeight)}
-        <NutritionsDialog openedNutritions={openNutritions} />
+        <NutritionsDialog
+          setOpenNutritions={(op) => setOpenNutritions(op)}
+          openedNutritions={openNutritions}
+        />
       </div>
     </div>
   );

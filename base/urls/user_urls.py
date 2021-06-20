@@ -20,6 +20,9 @@ urlpatterns = [
     path('updateweight/<str:pk>/', views.updateTraineeWeight,
          name="trainee-update-weight"),
 
+    path('addweight/<str:pk>/', views.addTraineeWeight,
+         name="trainee-add-weight"),
+
     path('delete/<str:pk>/', views.deleteUser, name='user-delete'),
 
     path('trainee/<str:pk>/', views.getTraineeById, name='trainee-profile'),

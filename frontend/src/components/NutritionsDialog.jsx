@@ -18,8 +18,11 @@ import {
   Col,
 } from "react-bootstrap";
 
-export default function NutritionsDialog({ openedNutritions }) {
-  const [openNutritions, setOpenNutritions] = React.useState(openedNutritions);
+export default function NutritionsDialog({
+  setOpenNutritions,
+  openedNutritions,
+}) {
+  // const [openNutritions, setOpenNutritions] = React.useState(openedNutritions);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -34,8 +37,6 @@ export default function NutritionsDialog({ openedNutritions }) {
 
   return (
     <div>
-      {console.log("openNutritions in dialog: ", openNutritions)}
-
       <Dialog
         fullScreen={fullScreen}
         open={openedNutritions}

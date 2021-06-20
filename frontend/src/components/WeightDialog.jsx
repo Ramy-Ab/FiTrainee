@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getTraineeInfo, updateTraineWeight } from "../actions/userActions";
 import Button from "@material-ui/core/Button";
@@ -20,14 +21,14 @@ import {
   Col,
 } from "react-bootstrap";
 
-export default function WeightDialog({ openedWeight }) {
+export default function WeightDialog({ setOpenWeight, openedWeight }) {
   const userDetails = useSelector((state) => state.userDetails);
   const { error: errorUser, loading: loadingUser, user } = userDetails;
 
   const traineeInfo = useSelector((state) => state.traineeInfo);
   const { loading, success, error, personelInfo } = traineeInfo;
 
-  const [openWeight, setOpenWeight] = React.useState(openedWeight);
+  // const [openWeight, setOpenWeight] = React.useState(openedWeight);
   const [weight, setWeight] = useState("");
   const [weightGoal, setWeightGoal] = useState("");
 
@@ -56,9 +57,9 @@ export default function WeightDialog({ openedWeight }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleClickOpen = () => {
-    setOpenWeight(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpenWeight(true);
+  // };
 
   const handleClose = () => {
     setOpenWeight(false);
@@ -71,15 +72,31 @@ export default function WeightDialog({ openedWeight }) {
           weight: weight,
           weightGoal: weightGoal,
         },
-        37
+        userInfo.id
       )
     );
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    axios
+      .post(`/api/users/addweight/${userInfo.id}/`, user, config)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setOpenWeight(false);
   };
 
   return (
     <div>
-      {console.log("openWeight in dialog: ", openWeight)}
+      {console.log("openWeight in dialog: ", openedWeight)}
 
       <Dialog
         fullScreen={fullScreen}
@@ -105,7 +122,7 @@ export default function WeightDialog({ openedWeight }) {
             style={{ left: "25%" }}
           >
             <FormControl
-              id="inlineFormInputGroupUsername2"
+              id="inlineFormInputGroupUsername1"
               placeholder="your actual weight ..."
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
