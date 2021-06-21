@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
 from django.contrib.auth.models import User
-from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
+from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, UserWeight
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -191,6 +191,24 @@ def updateTraineeWeight(request, pk):
     return Response(serializer.data)
 
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateTraineeNutitions(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializerWithToken(user, many=False)
+
+    data = request.data
+
+    user.userprofile.calories = data['calories']
+    user.userprofile.proteines = data['proteines']
+    user.userprofile.carbs = data['carbs']
+
+    user.userprofile.save()
+    user.save()
+
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def addTraineeWeight(request, pk):
@@ -206,3 +224,12 @@ def addTraineeWeight(request, pk):
     weight.save()
     user.save()
     return Response('weight Added')
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getMyWeight(request, pk):
+    user = User.objects.get(id=pk)
+    weights = user.weight_set.all()
+    serializer = UserWeight(weights, many=True)
+    return Response(serializer.data)

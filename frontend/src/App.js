@@ -36,8 +36,8 @@ function App() {
 
       <main className=" mt-5 py-3-main">
         <Route path="/dashboard" component={Dashboard} exact />
-        <Route path="/gym" component={HomePageScreen} exact />
-        <Route path="/" component={HomeScreen} exact />
+        <Route path="/shop" component={HomeScreen} exact />
+        <Route path="/" component={HomePageScreen} exact />
         <Route path="/login" component={LoginScreen} />
         <Route path="/register" component={RegisterScreen} exact />
         <Route path="/trainee" component={TraineeScreen} exact />
@@ -62,7 +62,7 @@ function App() {
         <Route path="/admin/orderlist" component={OrderListScreen} />
       </main>
 
-      {window.location.href.split("/")[4] === "dashboard" ? "" : <Footer />}
+      {window.location.href.split("/")[4] === "dashboard" ? "" : ""}
     </Router>
   );
 }

@@ -20,8 +20,14 @@ urlpatterns = [
     path('updateweight/<str:pk>/', views.updateTraineeWeight,
          name="trainee-update-weight"),
 
+    path('updatenutritions/<str:pk>/', views.updateTraineeNutitions,
+         name="trainee-update-nutrition"),
+
     path('addweight/<str:pk>/', views.addTraineeWeight,
          name="trainee-add-weight"),
+
+    path('getweights/<str:pk>/', views.getMyWeight,
+         name="trainee-get-weight"),
 
     path('delete/<str:pk>/', views.deleteUser, name='user-delete'),
 

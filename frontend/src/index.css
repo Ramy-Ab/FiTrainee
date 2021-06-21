@@ -392,7 +392,7 @@ select {
 }
 .MuiInputBase-input,
 .MuiInput-input {
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 .traineDash {
@@ -654,4 +654,8 @@ div.ant-progress-line {
   height: 50px !important;
   width: 50px !important;
   font-size: 12px !important;
+}
+
+.h-white {
+  color: white;
 }

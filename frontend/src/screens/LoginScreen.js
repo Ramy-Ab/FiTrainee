@@ -21,7 +21,7 @@ function LoginScreen({ location, history }) {
   useEffect(() => {
     if (userInfo) {
       if (userInfo.isAdmin) {
-        history.push("/gym");
+        history.push("/");
       } else {
         history.push(redirect);
       }
@@ -34,7 +34,7 @@ function LoginScreen({ location, history }) {
   };
 
   return (
-    <div className="login-header mt-5">
+    <div className="login-header mt-5 h-white">
       <FormContainer className="login-form">
         <div className="login-form pl-5 pr-5 pb-5 pt-1 mt-5">
           <h1>Sign In</h1>

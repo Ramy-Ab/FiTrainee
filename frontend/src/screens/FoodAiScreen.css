@@ -94,7 +94,7 @@ img.phone {
   width: 100%;
   z-index: 1000;
   /*	height:88px;*/
-  background-color: #efecef;
+  background-color: #000000;
   position: fixed;
   font-family: Raleway, HelveticaNeue, Helvetica;
   font-weight: 600;
@@ -242,7 +242,7 @@ img.phone {
     font-size: 15px;
   }
   .section {
-    background: white;
+    background: rgb(0, 0, 0);
   }
 
   #fp-nav.right {
@@ -587,7 +587,7 @@ a.button:visited {
 .contact select {
   -webkit-appearance: none;
   appearance: none;
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   line-height: 2em;
   border: 1px solid #6b7a85;
   border-radius: 3px;
@@ -728,7 +728,7 @@ a:hover,
   text-decoration: none !important;
 }
 .foodaiscreen {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0) !important;
 }
 .foodai-li {
   align-items: center !important;

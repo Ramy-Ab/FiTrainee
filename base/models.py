@@ -90,6 +90,10 @@ class UserProfile(models.Model):
     equipement = models.CharField(max_length=200, null=True, blank=True)
     days = models.CharField(max_length=200, null=True, blank=True)
     healthIssues = models.CharField(max_length=200, null=True, blank=True)
+    calories = models.CharField(max_length=200, null=True, blank=True)
+    proteines = models.CharField(max_length=200, null=True, blank=True)
+    carbs = models.CharField(max_length=200, null=True, blank=True)
+
 
     def __str__(self):
         return self.user.username

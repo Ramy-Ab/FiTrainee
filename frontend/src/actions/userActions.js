@@ -34,6 +34,9 @@ import {
   TRAINEE_UPDATE_WEIGHT_REQUEST,
   TRAINEE_UPDATE_WEIGHT_SUCCESS,
   TRAINEE_UPDATE_WEIGHT_FAIL,
+  TRAINEE_UPDATE_NUTRITION_REQUEST,
+  TRAINEE_UPDATE_NUTRITION_SUCCESS,
+  TRAINEE_UPDATE_NUTRITION_FAIL,
 } from "../constants/userConstants";
 
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
@@ -399,7 +402,7 @@ export const updateTraineProfile = (user, id) => async (dispatch, getState) => {
 export const updateTraineWeight = (user, id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: TRAINEE_UPDATE_REQUEST,
+      type: TRAINEE_UPDATE_WEIGHT_REQUEST,
     });
 
     const {
@@ -420,12 +423,12 @@ export const updateTraineWeight = (user, id) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: TRAINEE_UPDATE_SUCCESS,
+      type: TRAINEE_UPDATE_WEIGHT_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: TRAINEE_UPDATE_FAIL,
+      type: TRAINEE_UPDATE_WEIGHT_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -433,3 +436,42 @@ export const updateTraineWeight = (user, id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const updateTraineNutrition =
+  (user, id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: TRAINEE_UPDATE_NUTRITION_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/users/updatenutritions/${id}/`,
+        user,
+        config
+      );
+
+      dispatch({
+        type: TRAINEE_UPDATE_NUTRITION_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: TRAINEE_UPDATE_NUTRITION_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };

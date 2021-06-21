@@ -82,9 +82,15 @@ export default function WeightDialog({ setOpenWeight, openedWeight }) {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    console.log(userInfo.token);
+    console.log(userInfo.id);
 
     axios
-      .post(`/api/users/addweight/${userInfo.id}/`, user, config)
+      .post(
+        `/api/users/addweight/${userInfo.id}/`,
+        { weight: weightGoal },
+        config
+      )
       .then((res) => {
         console.log(res);
       })

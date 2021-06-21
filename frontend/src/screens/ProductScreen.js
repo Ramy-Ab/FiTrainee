@@ -166,8 +166,8 @@ function ProductScreen({ match, history }) {
             </Col>
           </Row>
           <Row>
-            <h4>Description :</h4>
-            <Col md={8} className="custom-d ml-3 mb-5 mt-3 br4">
+            <h4 className="h-white mt-3">Description :</h4>
+            <Col md={8} className="custom-d ml-3 mb-5 mt-3 br4 p-4 h-white">
               {product.description}
             </Col>
           </Row>

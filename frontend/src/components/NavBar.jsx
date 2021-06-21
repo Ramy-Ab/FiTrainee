@@ -32,7 +32,7 @@ function NavBar({ history }) {
 
   return (
     <nav className={nav ? "nav active" : "nav"}>
-      <LinkR to="/gym" className="logo">
+      <LinkR to="/" className="logo">
         <img src={logo} alt="" />
       </LinkR>
       <input className="menu-btn" type="checkbox" id="menu-btn" />
@@ -53,7 +53,7 @@ function NavBar({ history }) {
           </LinkR>
         </li>
         <li className="nav-li foodai-li">
-          <LinkR className="foodai-li" to="/">
+          <LinkR className="foodai-li" to="/shop">
             Shop
           </LinkR>
         </li>

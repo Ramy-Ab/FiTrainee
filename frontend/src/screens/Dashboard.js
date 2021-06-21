@@ -120,7 +120,7 @@ export default function Dashboard({ history }) {
 
   const logoutHandler = () => {
     dispatch(logout());
-    history.push("/gym");
+    history.push("/");
   };
 
   const handleDrawerOpen = () => {
