@@ -87,6 +87,7 @@ export default function BasicButtonGroup() {
       </MuiPickersUtilsProvider>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField
+          className="h-white"
           id="standard-basic"
           label="height"
           value={height}

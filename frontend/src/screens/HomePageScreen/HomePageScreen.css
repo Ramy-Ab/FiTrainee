@@ -638,5 +638,9 @@ nav .menu-btn,
 }
 .nav {
   background-color: #171515;
-  max-height: 3.5rem;
+  max-height: 3.2rem;
+}
+
+.nav .logo {
+  padding-bottom: 20px;
 }

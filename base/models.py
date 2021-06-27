@@ -94,7 +94,6 @@ class UserProfile(models.Model):
     proteines = models.CharField(max_length=200, null=True, blank=True)
     carbs = models.CharField(max_length=200, null=True, blank=True)
 
-
     def __str__(self):
         return self.user.username
 
@@ -103,6 +102,24 @@ class UserWeight(models.Model):
     userprofile = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL, null=True)
     weight = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.userprofile.user.username
+
+
+class UserNutrition(models.Model):
+    userprofile = models.ForeignKey(
+        UserProfile, on_delete=models.SET_NULL, null=True)
+    calorie = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    proteine = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    carb = models.DecimalField(
+        max_digits=7, decimal_places=2, null=True, blank=True)
+    foodName = models.CharField(max_length=200, null=True, blank=True)
+    foodWeight = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 

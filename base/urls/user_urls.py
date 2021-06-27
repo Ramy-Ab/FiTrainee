@@ -26,8 +26,14 @@ urlpatterns = [
     path('addweight/<str:pk>/', views.addTraineeWeight,
          name="trainee-add-weight"),
 
+    path('addnutrition/<str:pk>/', views.addTraineeNutrition,
+         name="trainee-add-nutrition"),
+
     path('getweights/<str:pk>/', views.getMyWeight,
          name="trainee-get-weight"),
+
+    path('getnutritions/<str:pk>/', views.getMyNutritions,
+         name="trainee-get-nutrition"),
 
     path('delete/<str:pk>/', views.deleteUser, name='user-delete'),
 

@@ -390,10 +390,6 @@ select {
 .select:hover::after {
   color: #f39c12;
 }
-.MuiInputBase-input,
-.MuiInput-input {
-  color: rgb(0, 0, 0) !important;
-}
 
 .traineDash {
   min-height: 133vh;
@@ -657,5 +653,47 @@ div.ant-progress-line {
 }
 
 .h-white {
-  color: white;
+  color: white !important;
+}
+
+.bground-black {
+  background-color: #000000;
+}
+
+.stepper {
+  background-color: #000000 !important;
+}
+
+.h-white .MuiStepLabel-alternativeLabel {
+  color: white !important;
+}
+
+/* .MuiInputBase-input,
+.MuiInput-input {
+  color: rgb(255, 255, 255) !important;
+} */
+
+.progress-weight .ant-progress-text {
+  display: flex;
+}
+
+.dashboard-style {
+  background-color: black;
+}
+
+.dashboard-style h6 {
+  color: white !important;
+}
+
+.drawer-style .MuiDrawer-paper {
+  background-color: red !important;
+}
+
+.MuiPaper-root.MuiDrawer-paper.makeStyles-drawerClose-155.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0 {
+  background-color: red;
+}
+
+.h-white .MuiInputBase-input,
+.MuiInput-input {
+  color: white !important;
 }

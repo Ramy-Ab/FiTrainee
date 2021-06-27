@@ -77,6 +77,7 @@ export default function NutritionsDialog({
         userInfo.id
       )
     );
+    setOpenNutritions(false);
   };
 
   return (

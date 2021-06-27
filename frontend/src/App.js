@@ -33,7 +33,6 @@ function App() {
   return (
     <Router>
       {window.location.href.split("/")[4] === "dashboard" ? "" : <NavBar />}
-
       <main className=" mt-5 py-3-main">
         <Route path="/dashboard" component={Dashboard} exact />
         <Route path="/shop" component={HomeScreen} exact />
@@ -61,8 +60,11 @@ function App() {
 
         <Route path="/admin/orderlist" component={OrderListScreen} />
       </main>
+      {window.location.href.split("/")[4] === ""
+        ? console.log("true")
+        : console.log("false")}
 
-      {window.location.href.split("/")[4] === "dashboard" ? "" : ""}
+      {window.location.href.split("/")[4] === "" ? <Footer /> : ""}
     </Router>
   );
 }

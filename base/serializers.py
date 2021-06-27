@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Product, Order, OrderItem, ShippingAddress, Review, FoodImage, UserProfile, UserWeight
+from .models import Product, Order, OrderItem, ShippingAddress, Review, FoodImage, UserProfile, UserWeight, UserNutrition
 import base64
 import uuid
 from django.core.files.base import ContentFile
@@ -26,15 +26,28 @@ class FoodImageSerializer(serializers.ModelSerializer):
 
 
 class UserWeightSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField(read_only=True)
+    userprofile = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = UserWeight
         fields = '__all__'
 
-    def get_user(self, obj):
-        user = obj.user
-        serializer = UserSerializer(user, many=False)
+    def get_userprofile(self, obj):
+        userprofile = obj.userprofile
+        serializer = UserProfileSerializer(userprofile, many=False)
+        return serializer.data
+
+
+class UserNutritionSerializer(serializers.ModelSerializer):
+    userprofile = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = UserNutrition
+        fields = '__all__'
+
+    def get_userprofile(self, obj):
+        userprofile = obj.userprofile
+        serializer = UserProfileSerializer(userprofile, many=False)
         return serializer.data
 
 

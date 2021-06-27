@@ -172,12 +172,16 @@ function RegisterScreen({ location, history }) {
   return (
     <div className="login-header mt-5">
       <FormContainer>
-        <div className="login-form pl-5 pr-5 pb-5 pt-1 mt-5">
+        <div className="login-form pl-5 pr-5  pt-1 mt-5">
           <div className={classes.root}>
-            <Stepper activeStep={activeStep} alternativeLabel>
+            <Stepper
+              activeStep={activeStep}
+              alternativeLabel
+              className="stepper"
+            >
               {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
+                <Step className="h-white" key={label}>
+                  <StepLabel className="h-white">{label}</StepLabel>
                 </Step>
               ))}
             </Stepper>
@@ -187,7 +191,16 @@ function RegisterScreen({ location, history }) {
                   <Typography className={classes.instructions}>
                     All steps completed
                   </Typography>
-                  <Button onClick={handleReset}>Reset</Button>
+                  <ButtonB
+                    type="submit"
+                    variant="primary"
+                    onClick={submitHandler}
+                  >
+                    Register
+                  </ButtonB>
+                  <Button style={{ color: "white" }} onClick={handleReset}>
+                    Reset
+                  </Button>
                 </div>
               ) : (
                 <div>
@@ -196,6 +209,7 @@ function RegisterScreen({ location, history }) {
                   </Typography>
                   <div>
                     <Button
+                      style={{ color: "white" }}
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       className={classes.backButton}
@@ -216,18 +230,17 @@ function RegisterScreen({ location, history }) {
           </div>
 
           <Row className="py-3">
-            <Col>
-              Have an Account?{" "}
+            <Col col-md-3>
               <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-                Sign In
+                Sign In{" "}
+                <p style={{ color: "#797c80", fontSize: "12px" }}>
+                  if you already have acount
+                </p>
               </Link>
             </Col>
           </Row>
         </div>
       </FormContainer>
-      <ButtonB type="submit" variant="primary" onClick={submitHandler}>
-        Register
-      </ButtonB>
     </div>
   );
 }

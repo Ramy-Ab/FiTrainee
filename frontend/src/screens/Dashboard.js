@@ -35,6 +35,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { Navbar, Nav, Container, Row, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import ProfileAdmin from "../components/ProfileAdmin";
+import { withStyles } from "@material-ui/styles";
 
 const drawerComponents = {
   Orders: { icon: <DescriptionIcon />, component: <Orders /> },
@@ -107,6 +108,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ColorDrawer = withStyles((theme) => ({
+  paper: {
+    color: "white",
+    backgroundColor: "red",
+  },
+}))(Drawer);
+
 export default function Dashboard({ history }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -145,7 +153,7 @@ export default function Dashboard({ history }) {
             [classes.appBarShift]: open,
           })}
         >
-          <Toolbar>
+          <Toolbar className="dashboard-style">
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -157,7 +165,7 @@ export default function Dashboard({ history }) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap className="h-white">
               Dashboard
             </Typography>
             <Avatar style={{ backgroundColor: "green" }}>
@@ -179,7 +187,8 @@ export default function Dashboard({ history }) {
             )}
           </Toolbar>
         </AppBar>
-        <Drawer
+        <ColorDrawer
+          className="drawer-style"
           variant="permanent"
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
@@ -217,7 +226,7 @@ export default function Dashboard({ history }) {
             ))}
           </List>
           <Divider />
-        </Drawer>
+        </ColorDrawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {drawerComponents[drawerText].component}

@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../components/SideBar";
 import { Row, Col } from "react-bootstrap";
 import Side from "../components/Side";
 import { Line, Bar } from "react-chartjs-2";
 import axios from "axios";
+import moment from "moment";
 
 function ProgressScreen() {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [chartData, setChartData] = useState({});
 
   const chart = () => {
-    let empSal = [];
-    let empAge = [];
+    let weight = [];
+    let date = [];
     axios
-      .get("http://dummy.restapiexample.com/api/v1/employees")
+      .get(`/api/users/getweights/${userInfo.id}/`)
       .then((res) => {
-        console.log(res);
-        for (const dataObj of res.data.data) {
-          empSal.push(parseInt(dataObj.employee_salary));
-          empAge.push(parseInt(dataObj.employee_age));
+        console.log(res.data);
+        for (const dataObj of res.data) {
+          weight.push(parseInt(dataObj.weight));
+          date.push(moment(dataObj.date).format("DD MMM YYYY"));
         }
-        console.log("empsal : ", empSal);
-        console.log("empage : ", empAge);
+        console.log("weight : ", weight);
+        console.log("date : ", date);
         setChartData({
-          labels: empAge,
+          labels: date,
           datasets: [
             {
-              label: "level of thickness",
-              data: empSal,
+              label: "Trainee Weight",
+              data: weight,
               backgroundColor: ["aqua"],
               borderwidth: 4,
             },
@@ -54,6 +59,22 @@ function ProgressScreen() {
               data={chartData}
               options={{
                 responsive: true,
+                scales: {
+                  xAxes: [
+                    {
+                      type: "time",
+                      time: {
+                        format: "DD/MM/YYY",
+                        tooltipFormat: "ll",
+                      },
+                    },
+                  ],
+                },
+                // scales: {
+                //   x: {
+                //     type: "timeseries",
+                //   },
+                // },
               }}
             />
           </div>

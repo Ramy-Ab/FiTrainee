@@ -1,11 +1,11 @@
-from base.models import UserProfile, UserWeight
+from base.models import UserNutrition, UserProfile, UserWeight
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
 from django.contrib.auth.models import User
-from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, UserWeight
+from base.serializers import ProductSerializer, UserNutritionSerializer, UserSerializer, UserSerializerWithToken, UserWeight, UserWeightSerializer
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -227,9 +227,39 @@ def addTraineeWeight(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def getMyWeight(request, pk):
     user = User.objects.get(id=pk)
-    weights = user.weight_set.all()
-    serializer = UserWeight(weights, many=True)
+    weights = user.userprofile.userweight_set.all()
+    serializer = UserWeightSerializer(weights, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addTraineeNutrition(request, pk):
+
+    user = User.objects.get(id=pk)
+    data = request.data
+
+    nutrition = UserNutrition.objects.create(
+        userprofile=user.userprofile,
+        calorie=data['calorie'],
+        proteine=data['proteine'],
+        carb=data['carb'],
+        foodName=data['foodName'],
+        foodWeight=data['foodWeight']
+    )
+
+    nutrition.save()
+    user.save()
+    return Response('nutrition Added')
+
+
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+def getMyNutritions(request, pk):
+    user = User.objects.get(id=pk)
+    nutritions = user.userprofile.usernutrition_set.all()
+    serializer = UserNutritionSerializer(nutritions, many=True)
     return Response(serializer.data)

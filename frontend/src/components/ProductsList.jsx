@@ -211,8 +211,7 @@ export const ProductsList = ({ history, match }) => {
 
     {
       title: "Name",
-      field: "username",
-      render: (row) => <NameCustomComponent name={row.name} />,
+      field: "name",
     },
     {
       title: "Price",

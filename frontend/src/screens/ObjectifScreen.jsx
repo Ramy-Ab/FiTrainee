@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { foodNutritionList } from "../actions/foodAction";
+import { getTraineeInfo } from "../actions/userActions";
 import { useDropzone } from "react-dropzone";
 import SideBar from "../components/SideBar";
 import Divider from "@material-ui/core/Divider";
@@ -39,6 +42,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import WeightDialog from "../components/WeightDialog";
 import NutritionsDialog from "../components/NutritionsDialog";
+import FoodList from "../components/FoodList";
 
 const Search = Input.Search;
 
@@ -46,8 +50,54 @@ function ObjectifScreen() {
   const [openWeight, setOpenWeight] = React.useState(false);
   const [openNutritions, setOpenNutritions] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [calories, setCalories] = useState("");
+  const [protein_g, setProtein_g] = useState("");
+  const [carbohydrates_total_g, setCarbohydrates_total_g] = useState("");
+  const userDetails = useSelector((state) => state.userDetails);
+  const { error: errorUser, loading: loadingUser, user } = userDetails;
+  const [weight, setWeight] = useState("");
+  const [weightGoal, setWeightGoal] = useState("");
+  const [dailyNutrition, SetDailyNutrition] = useState([]);
+
+  console.log("dailyNutritions : ", dailyNutrition);
+
+  const traineeInfo = useSelector((state) => state.traineeInfo);
+  const {
+    loading: loadingInfo,
+    success: successInfo,
+    error: errorInfo,
+    personelInfo,
+  } = traineeInfo;
+
+  // const [openWeight, setOpenWeight] = React.useState(openedWeight);
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    dispatch(getTraineeInfo(userInfo.id));
+    console.log("dispatched");
+  }, []);
+
+  useEffect(() => {
+    if (traineeInfo !== undefined) {
+      try {
+        console.log("personelInfo : ", traineeInfo);
+        setWeight(personelInfo["userProfile"].weight);
+        setWeightGoal(personelInfo["userProfile"].weightGoal);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [successInfo]);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const foodNutrition = useSelector((state) => state.foodNutrition);
+  const { success, error, loading, nutritions } = foodNutrition;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -72,6 +122,41 @@ function ObjectifScreen() {
   const [imageUrl, setImageUrl] = useState("");
   const [input, setInput] = useState("");
   const [send, setSend] = useState(false);
+
+  useEffect(() => {
+    if (result) {
+      console.log("useEffect trigred");
+      console.log("state", loading, success);
+      // console.log('function',  foodNutritionList(result))
+      if (result) {
+        dispatch(foodNutritionList(result));
+      }
+    } else {
+      dispatch(foodNutritionList("pizza"));
+    }
+  }, [result]);
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/getnutritions/${userInfo.id}/`)
+      .then((res) => {
+        SetDailyNutrition(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {}, [success]);
+
+  useEffect(() => {
+    if (!loading && success) {
+      console.log("nutritions : ", nutritions[0]);
+      console.log("sugar : ", nutritions[0].sugar_g);
+    } else if (!(loading && success)) {
+      console.log("error", error);
+    }
+  }, [success]);
 
   const blobToBase64 = (blob) => {
     const reader = new FileReader();
@@ -230,10 +315,16 @@ function ObjectifScreen() {
                   </div>
                 </Col>
               </Row>
-              <Row className="col-md-12 px-5">
+              <Row className="col-md-12 px-5 progress-weight">
                 <span style={{ display: "flex", justifyContent: "center" }}>
-                  <Progress percent={100} />
-                  <p style={{ color: "black", fontSize: "16px" }}>Calories</p>
+                  <Progress
+                    percent={((weight * 100) / weightGoal).toFixed(2)}
+                  />
+                  <p style={{ color: "black", fontSize: "16px" }}>
+                    {weightGoal}
+                  </p>
+                  {"  "}
+                  <p style={{ color: "black", fontSize: "16px" }}> Kg</p>
                 </span>
               </Row>
             </div>
@@ -309,39 +400,16 @@ function ObjectifScreen() {
                 <h6 className="h-black pt-3 pl-2"> Add Food</h6>
               </Col>
             </Row>
-            <Row className="col-md-12 ">
-              <Col className="col-md-1">
-                <img src={diet} alt="diet" style={{ height: "50px" }} />
-              </Col>
-              <Col className="col-md-4 mt-1">
-                <p
-                  style={{
-                    marginBottom: "auto",
-                    color: "#303133",
-                    fontSize: "18px",
-                  }}
-                >
-                  Pizza
-                </p>
-                <p
-                  style={{
-                    color: "#303333",
-                    fontSize: "11px",
-                  }}
-                >
-                  100 g
-                </p>
-              </Col>
-              <Col className="col-md-2 progress50">
-                <Progress
-                  className=""
-                  style={{ height: "50px", weight: "50px" }}
-                  type="circle"
-                  percent={75}
-                  format={(percent) => `${percent} Calories`}
-                />
-              </Col>
-            </Row>
+            {dailyNutrition.map((food) => (
+              <FoodList
+                id={food.id}
+                calorie={food.calorie}
+                carb={food.carb}
+                proteine={food.proteine}
+                foodName={food.foodName}
+                foodWeight={food.foodWeight}
+              />
+            ))}
           </Row>
         </Col>
       </Row>
