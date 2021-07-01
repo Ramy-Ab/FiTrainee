@@ -58,6 +58,7 @@ function ObjectifScreen() {
   const [weight, setWeight] = useState("");
   const [weightGoal, setWeightGoal] = useState("");
   const [dailyNutrition, SetDailyNutrition] = useState([]);
+  const [weightG, setWeightG] = useState();
 
   console.log("dailyNutritions : ", dailyNutrition);
 
@@ -114,6 +115,30 @@ function ObjectifScreen() {
 
   const handleNutritions = () => {
     setOpenNutritions(true);
+  };
+
+  const handleSave = () => {
+    setOpen(false);
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    console.log("nutritions to send", nutritions[0]);
+    const data = {
+      calorie: (nutritions[0].calories * weightG) / 100,
+      proteine: (nutritions[0].protein_g * weightG) / 100,
+      carb: (nutritions[0].carbohydrates_total_g * weightG) / 100,
+      foodName: result,
+      foodWeight: weightG,
+    };
+    axios
+      .post(`/api/users/addnutrition/${userInfo.id}/`, data, config)
+      .then((res) => {
+        console.log("sending data :      ", res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   // food recognition
@@ -447,6 +472,10 @@ function ObjectifScreen() {
               <FormControl
                 id="inlineFormInputGroupUsername2"
                 placeholder="your food weight .."
+                value={weightG}
+                onChange={(e) => {
+                  setWeightG(e.target.value);
+                }}
               />
               <InputGroup.Prepend>
                 <InputGroup.Text style={{ marginLeft: "0" }}>g</InputGroup.Text>
@@ -462,6 +491,10 @@ function ObjectifScreen() {
                     placeHolder="search ..."
                     type="text"
                     name="q"
+                    value={result}
+                    onChange={(e) => {
+                      setResult(e.target.value);
+                    }}
                     // onChange={(e) => }
                     className="mr-sm-2 ml-sm-5"
                   ></Form.Control>
@@ -539,7 +572,7 @@ function ObjectifScreen() {
               variant="contained"
               color="primary"
               size="large"
-              onClick={handleClose}
+              onClick={handleSave}
               startIcon={<SaveIcon />}
             >
               Save

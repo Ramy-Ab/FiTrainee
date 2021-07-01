@@ -52,7 +52,7 @@ function FoodList({ calorie, carb, proteine, foodName, foodWeight }) {
             className=""
             style={{ height: "50px", weight: "50px" }}
             type="circle"
-            percent={(calorie * 100) / calorie}
+            percent={99}
             format={(percent) => `${calorie} Calories`}
           />
         </Col>
@@ -62,7 +62,7 @@ function FoodList({ calorie, carb, proteine, foodName, foodWeight }) {
             style={{ height: "50px", weight: "50px" }}
             type="circle"
             strokeColor="red"
-            percent={(proteine * 100) / proteine}
+            percent={99}
             format={(percent) => `${proteine} Proteines`}
           />
         </Col>
@@ -72,7 +72,7 @@ function FoodList({ calorie, carb, proteine, foodName, foodWeight }) {
             style={{ height: "50px", weight: "50px" }}
             type="circle"
             strokeColor="black"
-            percent={(carb * 100) / carb}
+            percent={99}
             format={(percent) => `${carb} Carbs`}
           />
         </Col>

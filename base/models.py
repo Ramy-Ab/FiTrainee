@@ -16,7 +16,7 @@ import os
 import numpy as np
 import tensorflow as tf
 from .classes import classe_name
-# Create your models here.
+from datetime import date
 
 
 class FoodImage(models.Model):
@@ -29,47 +29,19 @@ class FoodImage(models.Model):
         return str(self.id)
 
     def save(self, *args, **kwargs):
-        print(self.image)
         img = Image.open(self.image)
         img_array = image.img_to_array(img)
-        print(img_array)
-        print(img_array.shape)
         resized = tf.image.resize(img_array, [224, 224])
-        print(resized.shape)
         img = resized[None, ...]
-        print(img.shape)
 
-        # global sess
-        # global graph
-
-        # sess = tf.compat.v1.Session()
-        # graph = tf.compat.v1.get_default_graph()
         file_model = os.path.join(
             settings.BASE_DIR, 'food_classification_final_model_tessst.h5')
 
-        # with graph.as_default():
-        #     set_session(sess)
         model = load_model(file_model)
-
-        print("im gonna predict")
-        # img = tf.Variable(img.numpy())
-        print(img)
-        model.summary()
         pred = model.predict(img, steps=1, verbose=1)
-
-        print("end of prediction")
-        print(pred)
         pred = np.argmax(pred)
-        print("pred : ")
-        print(pred)
         pred = classe_name[pred]
-        print(pred)
         self.result = str(pred)
-
-        # except:
-        #     print('failed to classify ')
-        #     self.result = 'failed'
-
         return super().save(*args, **kwargs)
 
 
@@ -121,7 +93,7 @@ class UserNutrition(models.Model):
     foodName = models.CharField(max_length=200, null=True, blank=True)
     foodWeight = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(default=date.today())
 
     def __str__(self):
         return self.userprofile.user.username
