@@ -228,8 +228,9 @@ def addTraineeWeight(request, pk):
 
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+#  @permission_classes([IsAuthenticated])
 def getMyWeight(request, pk):
+    print("pk : ", pk)
     user = User.objects.get(id=pk)
     weights = user.userprofile.userweight_set.all()
     serializer = UserWeightSerializer(weights, many=True)

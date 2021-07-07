@@ -111,7 +111,7 @@ function TraineeScreen() {
           healthIssues: healthIssues,
           objective: objective,
         },
-        37
+        userInfo.id
       )
     );
   };

@@ -52,6 +52,7 @@ function TrainingPlan() {
         aria-label="minimum height"
         rowsMin={5}
         cols={40}
+        style={{ color: "black" }}
         placeholder="Write here ..."
         onChange={(e) => {
           setHealthIssues(e.target.value);

@@ -59,8 +59,12 @@ function ObjectifScreen() {
   const [weightGoal, setWeightGoal] = useState("");
   const [dailyNutrition, SetDailyNutrition] = useState([]);
   const [weightG, setWeightG] = useState();
+  const [calorieTotal, setCalorieTotal] = useState(2000);
+  const [proteineTotal, setProteineTotal] = useState(100);
+  const [carbTotal, setCarbTotal] = useState(100);
 
-  console.log("dailyNutritions : ", dailyNutrition);
+  console.log("user : ", dailyNutrition);
+  // console.log("setCalorieTotal : ", calorieTotal);
 
   const traineeInfo = useSelector((state) => state.traineeInfo);
   const {
@@ -137,6 +141,14 @@ function ObjectifScreen() {
       .post(`/api/users/addnutrition/${userInfo.id}/`, data, config)
       .then((res) => {
         console.log("sending data :      ", res.data);
+        axios
+          .get(`/api/users/getnutritions/${userInfo.id}/`)
+          .then((res) => {
+            SetDailyNutrition(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => console.log(err));
   };
@@ -194,9 +206,11 @@ function ObjectifScreen() {
   };
 
   const onUploadButton = () => {
-    blobToBase64(Image[0]).then((res) => {
-      sendData(res);
-    });
+    if (Image[0]) {
+      blobToBase64(Image[0]).then((res) => {
+        sendData(res);
+      });
+    }
   };
 
   const sendData = (c) => {
@@ -288,7 +302,7 @@ function ObjectifScreen() {
   //end
 
   return (
-    <div className="traineDash">
+    <div className="traineDash" style={{ minHeight: "180vh" }}>
       <Row>
         <Col className="col-md-2">
           <Side />

@@ -116,6 +116,7 @@ def uploadImage(request):
 @permission_classes([IsAuthenticated])
 def createProductReview(request, pk):
     user = request.user
+    print(user)
     product = Product.objects.get(_id=pk)
     data = request.data
 

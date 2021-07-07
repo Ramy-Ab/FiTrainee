@@ -3,7 +3,7 @@ import ImageLinkForm from "../components/ImageLinkForm/ImageLinkForm";
 import Particles from "react-particles-js";
 import FoodRecognition from "../components/FoodRecognition/FoodRecognition";
 import { useDropzone } from "react-dropzone";
-import {Link} from 'react-scroll'
+import { Link } from "react-scroll";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./FoodAiScreen.css";
 import image1 from "../images/Image1.jpeg";
@@ -14,76 +14,75 @@ import image5 from "../images/Image5.jpeg";
 import image6 from "../images/Image6.jpeg";
 import upload from "../images/upload-photo.png";
 import analimg from "../images/analytique.png";
-import { Button,Alert,Spinner } from "react-bootstrap";
-import axios from 'axios'
+import { Button, Alert, Spinner } from "react-bootstrap";
+import axios from "axios";
 import FoodTableR from "../components/FoodTableR/FoodTableR";
 
-
 function FoodAiScreen() {
-  const [result,setResult] = useState('');
+  const [result, setResult] = useState("");
   const [display, setDisplay] = useState(true);
   const [imageUrl, setImageUrl] = useState("");
   const [input, setInput] = useState("");
-  const [send,setSend] = useState(false)
-
+  const [send, setSend] = useState(false);
 
   const blobToBase64 = (blob) => {
     const reader = new FileReader();
     reader.readAsDataURL(blob);
     return new Promise((resolve) => {
       reader.onloadend = () => {
-        resolve(reader.result); 
+        resolve(reader.result);
       };
     });
   };
 
-  const onUploadButton = () =>{
-    blobToBase64(Image[0]).then((res) => {
+  const onUploadButton = () => {
+    if (Image[0]) {
+      blobToBase64(Image[0]).then((res) => {
         sendData(res);
       });
-  }
-
-  const sendData = (c) => {
-    setSend(true)
-    console.log("send_true : ",send);
-    // sending data to machine learning model 
-    //test
-    const headers = {
-        'accept' : 'application/json'
     }
-
-    const fd = new FormData()
-    fd.append('image',c)
-
-    axios.post('/api/foodai/food/',fd,{headers: headers})
-    .then(res => {
-        console.log("sending data :      ",res.data)
-        
-        getImageResult(res.data.id)
-        setSend(false)
-        console.log("send : ",send);
-        
-    })
-    .catch(err => console.log(err))
-
-    //getting result from model 
-
-    const getImageResult = (id) =>{
-      axios.get(`/api/foodai/food/${id}`)
-      .then(res => {
-          console.log("receiving data :      ",res.data)
-          
-          setResult(res.data.result)
-      })
-      .catch(err => console.log(err))
-    }
-
-
   };
 
-  const imageHandler =(e) => {
+  const sendData = (c) => {
+    setSend(true);
+    console.log("send_true : ", send);
+    // sending data to machine learning model
+    //test
+    const headers = {
+      accept: "application/json",
+    };
+
+    const fd = new FormData();
+    fd.append("image", c);
+
+    axios
+      .post("/api/foodai/food/", fd, { headers: headers })
+      .then((res) => {
+        console.log("sending data :      ", res.data);
+
+        getImageResult(res.data.id);
+        setSend(false);
+        console.log("send : ", send);
+      })
+      .catch((err) => console.log(err));
+
+    //getting result from model
+
+    const getImageResult = (id) => {
+      axios
+        .get(`/api/foodai/food/${id}`)
+        .then((res) => {
+          console.log("receiving data :      ", res.data);
+
+          setResult(res.data.result);
+        })
+        .catch((err) => console.log(err));
+    };
+  };
+
+  const imageHandler = (e) => {
     console.log(e.target.files[0]);
-  }
+  };
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -125,51 +124,45 @@ function FoodAiScreen() {
     },
   });
 
-  const hideDropBox = () =>{
-    setDisplay(false)
-    console.log('object');
-  }
+  const hideDropBox = () => {
+    setDisplay(false);
+    console.log("object");
+  };
 
   return (
     <div className="foodaiscreen">
+      <Particles
+        className="particles"
+        params={{
+          particles: {
+            number: {
+              value: 70,
+              density: {
+                enable: true,
+                value_area: 700,
+              },
+            },
+            color: "#ff0000",
+            line_linked: {
+              shadow: {
+                enable: false,
+                color: "#ff0000",
+                blur: 5,
+              },
+            },
+          },
+        }}
+        style={{
+          width: "100%",
+          position: "fixed",
+          top: "0",
+          right: "0",
+          bottom: "0",
+          left: "0",
+          // z-index: "-1"
+        }}
+      />
 
-    
-        
-      <Particles className='particles'
-              params={{
-            		particles: {
-            			number: {
-                            value: 70,
-                            density: {
-                              enable: true,
-                                 value_area: 700  
-                            }
-                          },
-                          color : "#ff0000",
-                          line_linked: {
-                              
-            				shadow: {
-            					enable: false,
-            				    color: "#ff0000",
-            					blur: 5
-            				}
-            			},
-                          
-                          
-            		}
-            	}}
-                style={{
-                    width: '100%',
-                    position: "fixed",
-                    top: "0",
-                    right: "0",
-                    bottom: "0",
-                    left: "0",
-                    // z-index: "-1"
-                  }}
-              
-            />
-     
       <div className="center-content api-demo" id="cm_api-fullpage">
         <div className="section cm_fullheight">
           <div className="cm_fullheight_center">
@@ -177,20 +170,20 @@ function FoodAiScreen() {
               <div className="row">
                 <div className="col-sm-12 features">
                   <h1>Features</h1>
-                  <Link to='try' smooth={true} duration={1000}>
-                    <div className='pr-btns'>
-                      <span  className=' button-big animate-scroll pr-btn pr-btn-foodai ' >Try Food AI</span>
+                  <Link to="try" smooth={true} duration={1000}>
+                    <div className="pr-btns">
+                      <span className=" button-big animate-scroll pr-btn pr-btn-foodai ">
+                        Try Food AI
+                      </span>
                     </div>
                   </Link>
-                  
 
-                
                   <hr />
                 </div>
               </div>
               <div className="row feature-list">
                 <div className="col-sm-6 col-xs-12 feature">
-                <i class="fas fa-search"></i>
+                  <i class="fas fa-search"></i>
                   <h2>Precise Recognition of Food</h2>
                   <p>
                     <b>Food AI</b> API utilizes highly trained models that are
@@ -201,7 +194,7 @@ function FoodAiScreen() {
                 </div>
 
                 <div className="col-sm-6  col-xs-12 feature">
-                <i class="fas fa-atom"></i>
+                  <i class="fas fa-atom"></i>
                   <h2>Perpetually Evolving Food Identification</h2>
                   <p>
                     Food AI API is developed with the latest in machine learning
@@ -213,7 +206,7 @@ function FoodAiScreen() {
               </div>
               <div className="row feature-list">
                 <div className="col-sm-6  col-xs-12 feature">
-                <i class="fas fa-pizza-slice"></i>
+                  <i class="fas fa-pizza-slice"></i>
                   <h2>Highly Diverse Food Database</h2>
                   <p>
                     Our database encompasses many regional and ethnic specialty
@@ -223,7 +216,7 @@ function FoodAiScreen() {
                 </div>
 
                 <div className="col-sm-6  col-xs-12 feature">
-                <i class="fas fa-chart-bar"></i>
+                  <i class="fas fa-chart-bar"></i>
                   <h2>Rapid Analysis</h2>
                   <p>
                     Within a second a photo can become a highly detailed food
@@ -237,31 +230,38 @@ function FoodAiScreen() {
         </div>
         <div className="section" id="try">
           <div className="container">
-            
             <div className="row api-demo">
               <div className="col-sm-7">
                 <h5>You can upload your photo</h5>
 
-                <div className="image-dropbox" onChange={() => {setDisplay(false); console.log("display : ",display)}}>
-                    {display && <div 
-                    className="placeholder"
-                    {...getRootProps()}
-                    style={{ display: { display } ? "block" : "none" }}
-                  >
-                    <img src={upload} />
-                    <input {...getInputProps()}  />
-                    {isDragAActive ? (
-                      <p>Drop the Image here ...</p>
-                    ) : (
-                      <p>Add your image here  </p>
-                    )}
-                  </div>}
+                <div
+                  className="image-dropbox"
+                  onChange={() => {
+                    setDisplay(false);
+                    console.log("display : ", display);
+                  }}
+                >
+                  {display && (
+                    <div
+                      className="placeholder"
+                      {...getRootProps()}
+                      style={{ display: { display } ? "block" : "none" }}
+                    >
+                      <img src={upload} />
+                      <input {...getInputProps()} />
+                      {isDragAActive ? (
+                        <p>Drop the Image here ...</p>
+                      ) : (
+                        <p>Add your image here </p>
+                      )}
+                    </div>
+                  )}
                   <h3>{result}</h3>
                   <div className="previews" onChange={hideDropBox}>
                     {Image.map((upFile) => {
-                    //   blobToBase64(Image[0]).then((res) => {
-                    //     sendData(res);
-                    //   });
+                      //   blobToBase64(Image[0]).then((res) => {
+                      //     sendData(res);
+                      //   });
                       return (
                         <img
                           key={Math.floor(Math.random() * 10)}
@@ -279,34 +279,37 @@ function FoodAiScreen() {
                 </div>
 
                 <div className="upload-section ">
-                  <a className="fileUpload button" {...getRootProps()} >
+                  <a className="fileUpload button" {...getRootProps()}>
                     <input {...getInputProps()} />
                     {isDragAActive ? (
                       <p>Drop the Image here ...</p>
                     ) : (
                       <p style={{ color: "white", marginBottom: "0" }}>
-                        Upload{" "} 
+                        Upload{" "}
                       </p>
                     )}
                   </a>
-                  
+
                   <Button variant="primary" onClick={onUploadButton}>
-                  {send && <Spinner
-                    as="span"
-                    animation="grow"
-                    size="sm"
-                    role="status" 
-                    aria-hidden="true"
-                  />}{'    '}
-                    {send ? '...Loading' : 'Send'}
-                    
-                    </Button>
+                    {send && (
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                    )}
+                    {"    "}
+                    {send ? "...Loading" : "Send"}
+                  </Button>
                   <br />
                   <br />
 
                   <p clas="notice">
                     Note: By uploading files here you agree to have them
-                    temporarily stored in our training dataset to make it better for you 
+                    temporarily stored in our training dataset to make it better
+                    for you
                   </p>
                 </div>
                 <div className="url-section">URL Section</div>
@@ -340,12 +343,12 @@ function FoodAiScreen() {
                 </div>
 
                 <div className="row example-images">
-                <div className="col-xs-12">
+                  <div className="col-xs-12">
                     <h5>result</h5>
-                    {console.log("im in parent",result)}
+                    {console.log("im in parent", result)}
                     <FoodTableR result={result} />
-                  </div>  
-                
+                  </div>
+
                   <div className="col-xs-12">
                     <h5>TRY WITH EXAMPLE IMAGES</h5>
                   </div>

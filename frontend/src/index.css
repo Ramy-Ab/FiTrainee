@@ -697,3 +697,12 @@ div.ant-progress-line {
 .MuiInput-input {
   color: white !important;
 }
+
+.admin-data-table input {
+  color: black !important;
+}
+
+.dashboard-container .h-white .MuiInputBase-input,
+.MuiInput-input {
+  color: black !important;
+}

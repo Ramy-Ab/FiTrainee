@@ -96,6 +96,7 @@ function Orders() {
           title="All Orders"
           data={orderList["orders"]}
           columns={columns}
+          className="admin-data-table"
           options={{
             filtering: true,
             exportButton: true,

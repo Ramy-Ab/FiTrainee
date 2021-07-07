@@ -37,18 +37,6 @@ function Orders() {
     console.log("Orders : ", orderListMy["orders"]);
   }, [Orders]);
 
-  useEffect(() => {
-    if (userInfo) {
-      dispatch(listOrders());
-      console.log("inside useeffect :     ", orderList["orders"]);
-      setData(orderList["orders"]);
-      console.log("data", data);
-    } else {
-      console.log(history);
-      history.push("/login");
-    }
-  }, [dispatch, userInfo, history]);
-
   const columns = [
     {
       title: "ID",
