@@ -111,8 +111,8 @@ function PlaceOrderScreen({ history }) {
                         </Col>
 
                         <Col md={4}>
-                          {item.qty} X ${item.price} = $
-                          {(item.qty * item.price).toFixed(2)}
+                          {item.qty} X {item.price} DZ =
+                          {(item.qty * item.price).toFixed(2)} DZ
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -133,28 +133,28 @@ function PlaceOrderScreen({ history }) {
               <ListGroup.Item className="custom-d">
                 <Row>
                   <Col>Items:</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>{cart.itemsPrice} DZ</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item className="custom-d">
                 <Row>
                   <Col>Shipping:</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>{cart.shippingPrice} DZ</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item className="custom-d">
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>{cart.taxPrice} DZ</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item className="custom-d">
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>{cart.totalPrice} DZ</Col>
                 </Row>
               </ListGroup.Item>
 
