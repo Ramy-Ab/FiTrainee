@@ -262,11 +262,8 @@ def addTraineeNutrition(request, pk):
 # @permission_classes([IsAuthenticated])
 def getMyNutritions(request, pk):
     user = User.objects.get(id=pk)
-    print('date now : ', datetime.date.today())
     today = datetime.date.today()
     nutritions = user.userprofile.usernutrition_set.all()
     serializer = UserNutritionSerializer(nutritions, many=True)
-    for date in serializer.data:
-        print('nutritions : ', serializer.data)
 
     return Response(serializer.data)

@@ -13,6 +13,7 @@ import Message from "../components/Message";
 import { useHistory } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import Side from "../components/Side";
+import moment from "moment";
 
 function Orders() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function Orders() {
     {
       title: "Date",
       field: "createdAt",
+      render: (row) => moment(row.createdAt).format("DD MMMM YYYY"),
     },
     {
       title: "Total",

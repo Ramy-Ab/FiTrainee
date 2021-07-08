@@ -59,9 +59,9 @@ function ObjectifScreen() {
   const [weightGoal, setWeightGoal] = useState("");
   const [dailyNutrition, SetDailyNutrition] = useState([]);
   const [weightG, setWeightG] = useState();
-  const [calorieTotal, setCalorieTotal] = useState(2000);
-  const [proteineTotal, setProteineTotal] = useState(100);
-  const [carbTotal, setCarbTotal] = useState(100);
+  const [calorieTotal, setCalorieTotal] = useState(0);
+  const [proteineTotal, setProteineTotal] = useState(0);
+  const [carbTotal, setCarbTotal] = useState(0);
 
   console.log("user : ", dailyNutrition);
   // console.log("setCalorieTotal : ", calorieTotal);
@@ -89,7 +89,7 @@ function ObjectifScreen() {
   useEffect(() => {
     if (traineeInfo !== undefined) {
       try {
-        console.log("personelInfo : ", traineeInfo);
+        console.log("personelInfo : ", personelInfo);
         setWeight(personelInfo["userProfile"].weight);
         setWeightGoal(personelInfo["userProfile"].weightGoal);
       } catch (error) {
@@ -102,7 +102,33 @@ function ObjectifScreen() {
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const foodNutrition = useSelector((state) => state.foodNutrition);
-  const { success, error, loading, nutritions } = foodNutrition;
+  const { success, error, loading, nutritions = [] } = foodNutrition;
+
+  useEffect(() => {
+    let total_carb = 0;
+    let total_prot = 0;
+    let total_cal = 0;
+
+    dailyNutrition.forEach((elm) => {
+      total_carb += parseFloat(elm.carb);
+      total_prot += parseFloat(elm.proteine);
+      total_cal += parseFloat(elm.calorie);
+    });
+
+    console.log("personel Infos :", personelInfo);
+
+    if (personelInfo && personelInfo.userProfile) {
+      setCarbTotal(
+        Math.floor((total_carb / personelInfo.userProfile.carbs) * 100)
+      );
+      setProteineTotal(
+        Math.floor((total_prot / personelInfo.userProfile.proteines) * 100)
+      );
+      setCalorieTotal(
+        Math.floor((total_cal / personelInfo.userProfile.calories) * 100)
+      );
+    }
+  }, [dailyNutrition, personelInfo]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -402,15 +428,15 @@ function ObjectifScreen() {
               </Row>
               <Row className="col-md-12 px-5">
                 <span style={{ display: "flex", justifyContent: "center" }}>
-                  <Progress percent={100} />
+                  <Progress percent={calorieTotal} />
                   <p style={{ color: "black", fontSize: "16px" }}>Calories</p>
                 </span>
                 <span style={{ display: "flex", justifyContent: "center" }}>
-                  <Progress percent={70} />
+                  <Progress percent={proteineTotal} />
                   <p style={{ color: "black", fontSize: "16px" }}>Protéine</p>
                 </span>
                 <span style={{ display: "flex", justifyContent: "center" }}>
-                  <Progress percent={30} />
+                  <Progress percent={carbTotal} />
                   <p style={{ color: "black", fontSize: "16px" }}>Carbs</p>
                 </span>
               </Row>

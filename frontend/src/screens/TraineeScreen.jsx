@@ -25,6 +25,7 @@ import Avatar from "@material-ui/core/Avatar";
 import FormControl from "@material-ui/core/FormControl";
 import profilIcon from "../assets/profilIcon.svg";
 import resume from "../assets/resume.svg";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -264,7 +265,11 @@ function TraineeScreen() {
                 <Form.Control
                   placeholder="Enter Birthdate"
                   className="justify-content-md-center"
-                  value={birthDate}
+                  value={
+                    moment(birthDate).isValid()
+                      ? moment(birthDate).format("DD - MM - YYYY")
+                      : birthDate
+                  }
                   onChange={(e) => setBirthDate(e.target.value)}
                   // readOnly
                 />

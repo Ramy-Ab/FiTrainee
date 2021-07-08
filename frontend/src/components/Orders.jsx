@@ -7,6 +7,7 @@ import NameCustomComponent from "../components/NameCustomComponent ";
 import Loader from "./Loader";
 import Message from "./Message";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 
 function Orders() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function Orders() {
     {
       title: "Date",
       field: "createdAt",
+      render: (row) => moment(row.createdAt).format("DD MMMM YYYY"),
     },
     {
       title: "Total",

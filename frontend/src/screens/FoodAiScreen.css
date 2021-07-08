@@ -394,9 +394,6 @@ img.phone {
   font-weight: 500;
   text-transform: uppercase;
 }
-.image-dropbox .placeholder img {
-  /* margin-bottom: 10px; */
-}
 
 .image-dropbox.active .placeholder {
   border: 1px dashed green;
