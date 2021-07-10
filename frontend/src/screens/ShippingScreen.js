@@ -62,7 +62,7 @@ function ShippingScreen({ history }) {
           </Form.Group>
 
           <Form.Group controlId="country" className="h-white">
-            <Form.Label>Country</Form.Label>
+            <Form.Label>Region</Form.Label>
             <Form.Control
               required
               type="text"

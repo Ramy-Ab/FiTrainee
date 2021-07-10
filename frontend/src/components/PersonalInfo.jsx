@@ -98,6 +98,7 @@ export default function BasicButtonGroup() {
         cm
         <TextField
           id="standard-basic"
+          className="h-white"
           label="weight"
           value={weight}
           onChange={(e) => {

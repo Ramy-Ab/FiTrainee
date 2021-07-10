@@ -33,36 +33,36 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
-    # try:
-    # 1- create user auth
-    user = User.objects.create(
-        first_name=data['name'],
-        username=data['email'],
-        email=data['email'],
-        password=make_password(data['password'])
-    )
+    try:
+        # 1- create user auth
+        user = User.objects.create(
+            first_name=data['name'],
+            username=data['email'],
+            email=data['email'],
+            password=make_password(data['password'])
+        )
 
-    # 2- create userProfile
-    profile = UserProfile.objects.create(
-        user=user,
-        height=data['height'],
-        weight=data['weight'],
-        weightGoal=data['weightGoal'],
-        birthDate=data['birthDate'],
-        sex=data['sex'],
-        activitie=data['activitie'],
-        objective=data['objective'],
-        experience=data['experience'],
-        equipement=data['equipement'],
-        days=data['days'],
-        healthIssues=data['healthIssues'],
-    )
+        # 2- create userProfile
+        profile = UserProfile.objects.create(
+            user=user,
+            height=data['height'],
+            weight=data['weight'],
+            weightGoal=data['weightGoal'],
+            birthDate=data['birthDate'],
+            sex=data['sex'],
+            activitie=data['activitie'],
+            objective=data['objective'],
+            experience=data['experience'],
+            equipement=data['equipement'],
+            days=data['days'],
+            healthIssues=data['healthIssues'],
+        )
 
-    serializer = UserSerializerWithToken(user, many=False)
-    return Response(serializer.data)
-    # except:
-    #     message = {'detail': 'User with this email already exists'}
-    #     return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail': 'User with this email already exists please reset'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])

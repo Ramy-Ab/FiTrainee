@@ -102,9 +102,7 @@ function RegisterScreen({ location, history }) {
         return (
           <div>
             <h1>Sign Up</h1>
-            {message && <Message variant="danger">{message}</Message>}
-            {error && <Message variant="danger">{error}</Message>}
-            {loading && <Loader />}
+
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
@@ -198,6 +196,9 @@ function RegisterScreen({ location, history }) {
                   >
                     Register
                   </ButtonB>
+                  {message && <Message variant="danger">{message}</Message>}
+                  {error && <Message variant="danger">{error}</Message>}
+                  {loading && <Loader />}
                   <Button style={{ color: "white" }} onClick={handleReset}>
                     Reset
                   </Button>

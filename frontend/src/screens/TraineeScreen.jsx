@@ -246,7 +246,7 @@ function TraineeScreen() {
                 />
               </Col>
             </Row>
-            <Row className="col-md-6 justify-content-md-center">
+            <Row className="col-md-12 justify-content-md-center">
               <Col>
                 <Form.Label>Weight Goal : </Form.Label>
                 <Form.Control
@@ -257,10 +257,7 @@ function TraineeScreen() {
                   // readOnly
                 />
               </Col>
-            </Row>
-
-            <Row className="col-md-12 justify-content-md-center">
-              <Col className="col-md-4">
+              <Col className="col-md-6">
                 <Form.Label>Birthdate : </Form.Label>
                 <Form.Control
                   placeholder="Enter Birthdate"
@@ -274,7 +271,10 @@ function TraineeScreen() {
                   // readOnly
                 />
               </Col>
-              <Col className="col-md-2">
+            </Row>
+
+            <Row className="col-md-12 justify-content-md-center">
+              <Col className="col-md-6">
                 <Form.Label>Sex : </Form.Label>
                 <Form.Control
                   placeholder="Enter Sex"
@@ -284,8 +284,6 @@ function TraineeScreen() {
                   // readOnly
                 />
               </Col>
-            </Row>
-            <Row className="col-md-12 justify-content-md-center">
               <Col>
                 <Form.Label>Activitie : </Form.Label>
                 <Form.Control
@@ -296,7 +294,9 @@ function TraineeScreen() {
                   // readOnly
                 />
               </Col>
-              <Col>
+            </Row>
+            <Row className="col-md-12 justify-content-md-center">
+              <Col className="col-md-6 justify-content-md-center">
                 <Form.Label>Experience : </Form.Label>
                 <Form.Control
                   className="justify-content-md-center"
@@ -306,9 +306,7 @@ function TraineeScreen() {
                   // readOnly
                 />
               </Col>
-            </Row>
-            <Row className="col-md-12 justify-content-md-center">
-              <Col className="col-md-4">
+              <Col className="col-md-6">
                 <Form.Label>Equipement : </Form.Label>
                 <Form.Control
                   placeholder="Enter Equipement"
@@ -318,13 +316,25 @@ function TraineeScreen() {
                   // readOnly
                 />
               </Col>
-              <Col className="col-md-2">
+            </Row>
+            <Row className="col-md-12 justify-content-md-center">
+              <Col className="col-md-6">
                 <Form.Label>Days : </Form.Label>
                 <Form.Control
                   placeholder="Enter Days"
                   className="justify-content-md-center"
                   value={days}
                   onChange={(e) => setDays(e.target.value)}
+                  // readOnly
+                />
+              </Col>
+              <Col className="col-md-6">
+                <Form.Label>Objective : </Form.Label>
+                <Form.Control
+                  placeholder="Enter Objective"
+                  className="justify-content-md-center"
+                  value={objective}
+                  onChange={(e) => setObjective(e.target.value)}
                   // readOnly
                 />
               </Col>
@@ -342,7 +352,7 @@ function TraineeScreen() {
               </Col>
             </Row>
             <Row className="col-md-12 justify-content-md-center">
-              <Col className="col-md-7">
+              <Col className="col-md-12">
                 <Form.Label>Health Issues : </Form.Label>
                 <Form.Control
                   placeholder="write here"

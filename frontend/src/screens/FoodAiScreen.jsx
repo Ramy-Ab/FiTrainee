@@ -186,10 +186,11 @@ function FoodAiScreen() {
                   <i class="fas fa-search"></i>
                   <h2>Precise Recognition of Food</h2>
                   <p>
-                    <b>Food AI</b> API utilizes highly trained models that are
-                    not only able to recognize a variety of dishes but has the
-                    granularity to differentiate between different presentation
-                    style, preparation methods, and regional variations.
+                    <b>Food AI</b> API utilizes EfficientNet highly trained
+                    models that are not only able to recognize a variety of
+                    dishes but has the granularity to differentiate between
+                    different presentation style, preparation methods, and
+                    regional variations with accuracy of 80 %.
                   </p>
                 </div>
 
@@ -209,9 +210,10 @@ function FoodAiScreen() {
                   <i class="fas fa-pizza-slice"></i>
                   <h2>Highly Diverse Food Database</h2>
                   <p>
-                    Our database encompasses many regional and ethnic specialty
-                    food items. Never before has it been possible to receive
-                    analysis on such a wide selection of foods.
+                    Our FOOD101 database encompasses many regional and ethnic
+                    specialty food items and it has 101 category of food with
+                    1000 image for each one. Never before has it been possible
+                    to receive analysis on such a wide selection of foods.
                   </p>
                 </div>
 
