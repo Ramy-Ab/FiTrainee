@@ -20,6 +20,16 @@ Live Demo can be viewed at 'Not Ready'
 - Checkout process (shipping, payment method, etc)
 - PayPal / credit card integration
 
+# Demo :
+
+Shope screen :
+https://user-images.githubusercontent.com/53955511/126505938-37a132c5-3861-49fb-84df-f90125f3a36c.PNG
+
+Food Ai :
+https://user-images.githubusercontent.com/53955511/126506082-36402ef1-57ad-48ff-a3de-c8c049c12bd2.PNG
+
+Admin Dashboard
+
 # Download & Setup Instructions
 
 - 1 - Clone project: git clone https://github.com/Ramy-Ab/FiTrainee
