@@ -26,10 +26,10 @@ Shope screen :
 ![Demo](https://user-images.githubusercontent.com/53955511/126505938-37a132c5-3861-49fb-84df-f90125f3a36c.PNG)
 
 Food Ai :
-https://user-images.githubusercontent.com/53955511/126506082-36402ef1-57ad-48ff-a3de-c8c049c12bd2.PNG
+![Demo](https://user-images.githubusercontent.com/53955511/126506082-36402ef1-57ad-48ff-a3de-c8c049c12bd2.PNG)
 
 Admin Dashboard :
-https://user-images.githubusercontent.com/53955511/126506150-6887f103-c127-4ce7-abcc-913b8322ce57.PNG
+![Demo](https://user-images.githubusercontent.com/53955511/126506150-6887f103-c127-4ce7-abcc-913b8322ce57.PNG)
 
 # Download & Setup Instructions
 
